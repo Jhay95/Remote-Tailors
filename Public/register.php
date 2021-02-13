@@ -48,7 +48,7 @@ require_once("navigation.php");
                 </form>
             </div>
 
-            <div class="tab-pane fade" id="nav-customer" role="tabpanel" aria-labelledby="nav-customer-tab">
+            <div class="tab-pane fade show" id="nav-customer" role="tabpanel" aria-labelledby="nav-customer-tab">
                 <form class="container" action="../Private/functions.php" method="post">
                     <div class="form-group">
                         <label for="name">Name</label>
