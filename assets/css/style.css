@@ -1,0 +1,15 @@
+.w-100 {
+    width: 100% !important;
+    height: 55vh;
+}
+
+
+.pics {
+    width: 150px;
+    height: 150px;
+}
+
+.display {
+    border: solid black 0.5px;
+    margin-bottom: 2px;
+}
