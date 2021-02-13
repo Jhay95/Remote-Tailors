@@ -1,4 +1,4 @@
-<footer class="bg-info">
+<footer class="bg-info position-sticky">
     <div class="container text-center">
         <div class="row">
             <div class="col">&copy; Copyright <?php echo date("Y"); ?> </div>
