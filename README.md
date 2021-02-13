@@ -23,3 +23,4 @@
 ### Assets
    * css - Directory for custom-defined stylesheets
    * images - Directory for application images
+   
