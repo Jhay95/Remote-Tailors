@@ -1,14 +1,24 @@
 <!--HTML !Doc Starts here-->
 <?php
 require_once('head.php');
-require_once('navigation.php');
 ?>
 
-<h2>Login Here!</h2>
 
+<!--Carousel/Banner ---->
+<header>
+    <?php
+    require_once("navigation.php");
+    ?>
 
+    <div class="banner">
 
-<div>
+    </div>
+</header>
+
+<section>
+
+    <div class="container">
+        <h2>Login Here!</h2>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-tailor-tab" data-toggle="tab" href="#nav-tailor" role="tab"
@@ -21,7 +31,7 @@ require_once('navigation.php');
         <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-tailor" role="tabpanel" aria-labelledby="nav-tailor-tab">
                 <form class="container" action="../Private/functions.php" method="post">
-                   
+
                     <div class="form-group">
                         <label for="uname">Username</label>
                         <input type="text" class="form-control" id="uname">
@@ -38,8 +48,6 @@ require_once('navigation.php');
 
             <div class="tab-pane fade show active" id="nav-customer" role="tabpanel" aria-labelledby="nav-customer-tab">
                 <form class="container" action="../Private/functions.php" method="post">
-                   
-                  
 
                     <div class="form-group">
                         <label for="uname">Username</label>
@@ -52,16 +60,12 @@ require_once('navigation.php');
                     </div>
 
                     <button type="submit" class="btn btn-primary" name="submit-customer">Login</button>
+
                 </form>
-
             </div>
-
         </div>
     </div>
-
-    </br></br></br></br> </br></br></br></br>
-
-
+</section>
 
 <?php
 require_once('footer.php');
