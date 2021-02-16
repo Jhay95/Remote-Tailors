@@ -12,7 +12,7 @@ require_once('head.php');
     </div>
 </header>
 
-<section>
+<section class="content">
     <div class="container">
         <h3>About Us!!</h3>
 
