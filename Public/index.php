@@ -3,7 +3,6 @@ require_once('../Private/functions.php');
 
 // Test tailor data
 $res = get_tailor();
-
 ?>
 
 <!--HTML !Doc Starts here-->
@@ -18,73 +17,36 @@ require_once('head.php');
     require_once("navigation.php");
     ?>
 
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="../assets/images/pexels-cottonbro-4620607.jpg" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>...</h5>
-                    <p>...</p>
-                </div>
-            </div>
+    <div class="banner">
 
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../assets/images/pexels-cottonbro-4620610.jpg" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>...</h5>
-                    <p>...</p>
-                </div>
-            </div>
-
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../assets/images/pexels-pixabay-461035.jpg" alt="Third slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>...</h5>
-                    <p>...</p>
-                </div>
-            </div>
-
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
     </div>
 </header>
 
 <!--- Filter bar ---->
-<div class="jumbotron">
-
-</div>
+<?php
+require_once("filter.php")
+?>
 
 
 <!---Display Table--->
-<section class="container">
-    <h1>Welcome!!</h1>
-
+<section class="content">
     <div class="container">
         <div class="row">
             <?php while ($row = $res->fetch_assoc()) { ?>
-                <div class="col-sm-4 display">
-                    <div>
-                        <img class="pics" src="" alt="">
+                <div class="col-sm-4">
+                    <div class="row t-card">
+                        <div class="col-sm-5">
+                            <img src="http://via.placeholder.com/140x140" alt="">
+                        </div>
+
+                        <div class="col-sm-7">
+                            <?php echo "<br>" . "<h6><strong>Name: </strong><em>" . $row["tailor_fname"] . " " . $row["tailor_lname"] . "</em></h6>";
+                                    echo "<h6><strong>Location:</strong><em>" . $row["tailor_city"] . "</em></h6>";
+                                    echo "<h6><strong>Specialty:</strong><em>" . $row["tailor_style"] . "</em></h6>";
+                            ?>
+                            <button type="submit" class="btn btn-secondary btn-sm" name="see-tailor">see more</button>
+                        </div>
                     </div>
-
-                    <div>
-                        <?php echo "<h6>" . $row["tailor_fname"]. " " . $row["tailor_lname"] . "</h6>". "<br>"; ?>
-
-                    </div>
-
-
                 </div>
             <?php } ?>
         </div>
