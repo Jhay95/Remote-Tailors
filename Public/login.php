@@ -17,7 +17,7 @@ require_once('head.php');
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                <h2>Create Account</h2>
+                <h2>Sign in</h2>
 
                 <div>
                     <nav>
