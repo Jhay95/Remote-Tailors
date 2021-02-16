@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container">
         <!-- Logo Section -->
-        <a class="navbar-brand" href="index.php"><h1>Remote Tailor</h1></a>
+        <a class="navbar-brand" href="index.php"><span class="text">Remote Tailor</span></a>
 
         <!-- Navigation Section -->
         <div class="row">
