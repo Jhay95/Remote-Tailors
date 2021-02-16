@@ -1,4 +1,4 @@
-<footer class="bg-info page-footer mt-auto"> <!--clinton-->
+<footer class="page-footer mt-auto"> <!--clinton-->
     <div class="container text-center">
         <div class="row">
             <div class="col">&copy; Copyright <?php echo date("Y"); ?> </div>
