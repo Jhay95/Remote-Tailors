@@ -24,7 +24,7 @@
    * head.php - HTML head element
    * navigation.php - HTML navigation element
    * footer.php - HTML footer and body closing tag
-    #### Assets
+     #### Assets
         * css - Directory for custom-defined stylesheets
         * images - Directory for application images
    
