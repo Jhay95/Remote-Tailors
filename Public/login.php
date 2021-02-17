@@ -1,10 +1,15 @@
 <?php
-require_once("../Private/functions.php");
+require_once('../Private/initialize.php');
+
 session_start();
+
+$www = WWW_ROOT;
+$auth = 'tailors/index.php';
+$unauth = 'login.php';
 
 if (IsSet($_SESSION["user"]))			//if username exists in session, user has logged in
 {
-    header("Location: ../Public/tailors/index.php");		//forward to use home page
+    header("Location: $auth");		//forward to use home page
     exit();
 }
 ?>
@@ -46,7 +51,7 @@ require_once('head.php');
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-tailor" role="tabpanel"
                              aria-labelledby="nav-tailor-tab">
-                            <form class="container" action="../Private/functions.php" method="post">
+                            <form class="container" action="../Private/validate.php" method="post">
 
                                 <div class="form-group">
                                     <label for="email">Email address</label>
