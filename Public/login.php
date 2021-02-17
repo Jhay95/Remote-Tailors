@@ -1,4 +1,21 @@
 <?php
+require_once('../Private/initialize.php');
+
+session_start();
+
+$www = WWW_ROOT;
+$auth = 'tailors/index.php';
+$unauth = 'login.php';
+
+if (IsSet($_SESSION["user"]))			//if username exists in session, user has logged in
+{
+    header("Location: $auth");		//forward to use home page
+    exit();
+}
+?>
+
+<!---!DOC HTML Starts here--->
+<?php
 require_once('head.php');
 ?>
 
@@ -8,7 +25,7 @@ require_once('head.php');
     require_once("navigation.php");
     ?>
 
-    <div class="banner">
+    <div class="banner" id="login">
 
     </div>
 </header>
@@ -34,45 +51,39 @@ require_once('head.php');
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-tailor" role="tabpanel"
                              aria-labelledby="nav-tailor-tab">
-                            <form class="container" action="../Private/functions.php" method="post">
-                                <div class="form-group">
-                                    <label for="uname">Username</label>
-                                    <input type="text" class="form-control" id="uname">
-                                </div>
+                            <form class="container" action="../Private/validate.php" method="post">
 
                                 <div class="form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <input type="email" class="form-control" name="email">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password">
+                                    <input type="password" class="form-control" name="password">
                                 </div>
 
-                                <button type="submit" class="btn btn-primary" name="submit-tailor">Submit</button>
+                                <input type="submit" class="btn btn-primary" name="submit-tailor">
                             </form>
                         </div>
 
                         <div class="tab-pane fade show" id="nav-customer" role="tabpanel"
                              aria-labelledby="nav-customer-tab">
-                            <form class="container" action="../Private/functions.php" method="post">
+                            <form class="container" action="../Private/validate.php" method="post">
 
                                 <div class="form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <input type="email" class="form-control" name="email">
                                 </div>
 
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password">
+                                    <input type="password" class="form-control" name="password">
                                 </div>
 
-                                <button type="submit" class="btn btn-primary" name="submit-visitor">Submit</button>
+                                <input type="submit" class="btn btn-primary" name="submit-visitor">
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>

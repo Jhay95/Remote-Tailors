@@ -20,6 +20,7 @@
                             <!---Clinton Changed ml-auto to justify-content-end --->
                             <li class="nav-item">
                                 <a class="nav-link" href="index.php">Home</a>
+
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="about_us.php">About Us</a>

@@ -8,7 +8,7 @@ require_once('head.php');
     require_once("navigation.php");
     ?>
 
-    <div class="banner">
+    <div class="banner" id="register">
 
     </div>
 </header>
