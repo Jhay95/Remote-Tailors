@@ -24,7 +24,7 @@ $username=$_SESSION["user"];		//get user name into variable $username
 <body>
 <h1>Tailors Dashboard: Coming Soon!!</h1>
 <form method="get" action="../logout.php">
-    <input type="submit" name="logout">
+    <button type="submit" name="logout">logout!</button>
 </form>
 </body>
 </html>
