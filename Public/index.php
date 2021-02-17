@@ -51,8 +51,6 @@ require_once("filter.php")
             <?php } ?>
         </div>
     </div>
-
-
 </section>
 
 
