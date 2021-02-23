@@ -1,15 +1,10 @@
 <?php
-require_once('../../Private/initialize.php');
 session_start();					//retrieve or create session
-$www   = WWW_ROOT;
-$unauth = 'login.php';
 
-if (!IsSet($_SESSION["user"]))			//user name must in session to stay here
+if (isset($_SESSION["user"]))			//user name must in session to stay here
 {
-    header("Location: $www$unauth");		//if not, go back to login page
-    exit();
+    $username=$_SESSION["user"];		//get user name into variable $username
 }
-$username=$_SESSION["user"];		//get user name into variable $username
 ?>
 
 <!doctype html>
@@ -23,7 +18,7 @@ $username=$_SESSION["user"];		//get user name into variable $username
 </head>
 <body>
 <h1>Tailors Dashboard: Coming Soon!!</h1>
-<form method="get" action="../logout.php">
+<form method="get" action="logout.php">
     <button type="submit" name="logout">logout!</button>
 </form>
 </body>
