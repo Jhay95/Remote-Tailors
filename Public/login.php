@@ -5,7 +5,7 @@ session_start();
 
 $www = WWW_ROOT;
 $auth = 'tailors/index.php';
-$unauth = 'login.php';
+$unauth = 'validate.php';
 
 if (IsSet($_SESSION["user"]))			//if username exists in session, user has logged in
 {
@@ -47,7 +47,44 @@ require_once('head.php');
                                aria-controls="nav-customer" aria-selected="false">Customer</a>
                         </div>
                     </nav>
+                    <!---Error Message to output when submit button is click with empty fields---->
+                    <?php
+                    if (@$_GET['Empty']==true) {
+                        ?>
+                        <div style="color: #e50505;">
+                            <?php
+                            echo $_GET['Empty']
+                            ?>
+                        </div>
+                    <?php
+                    }
+                    ?>
 
+                    <!---Error Message to output when Login details are not valid---->
+                    <?php
+                    if (@$_GET['Invalid']==true) {
+                        ?>
+                        <div style="color: #e50505;">
+                            <?php
+                            echo $_GET['Invalid']
+                            ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
+
+                    <!---Logged out Message ---->
+                    <?php
+                    if (@$_GET['Logout']==true) {
+                        ?>
+                        <div style="color: #e50505;">
+                            <?php
+                            echo $_GET['Logout']
+                            ?>
+                        </div>
+                        <?php
+                    }
+                    ?>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-tailor" role="tabpanel"
                              aria-labelledby="nav-tailor-tab">
