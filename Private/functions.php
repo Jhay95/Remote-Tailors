@@ -47,11 +47,11 @@ function get_women(): mysqli_result|bool
 }
 
 // Validate login
-function login_validate($email,$password): mysqli_result|bool
+function check_user($par1=null,$par2=null): mysqli_result|bool
 {
     // Check to see if details exist in database
     if ($_POST["submit-tailor"]) {
-        $sql = "SELECT `tailor_id` FROM `tailors` WHERE `tailor_email` = '" . $email . "' and `tailor_password` = '" . $password . "'";
+        $sql = "SELECT `tailor_id` FROM `tailors` WHERE `tailor_email` = '" . $par1 . "' and `tailor_password` = '" . $par2 . "'";
     } /*else {
         $sql = "SELECT `tailor_id` FROM `customer` WHERE `tailor_email` = '" . $email . "' and `tailor_password` = '" . $password . "'";
     }*/

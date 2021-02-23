@@ -20,7 +20,7 @@ if (isset($_POST)) {                        // Check if there was is a post requ
         header("Location: $unauth?Empty=Please fill in the blank fields!!");
         exit();
     } else {                //validate login with database record
-        $result = login_validate($_POST["email"], $_POST["password"]);
+        $result = check_user($_POST["email"], $_POST["password"]);
         if ($result->fetch_assoc()) {               // if a value is returned from the function login_validate
             $_SESSION["user"] = $_POST["email"];    //store email into session variable
             header("Location: $auth");       //then forward to home page
