@@ -1,5 +1,5 @@
 <?php
-require_once('../Private/functions.php');
+require_once('../Private/initialize.php');
 
 // Test tailor data
 $res = get_tailor();
