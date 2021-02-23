@@ -8,11 +8,9 @@ define("PUBLIC_PATH", PROJECT_PATH . '/Public');
 define("SHARED_PATH", PUBLIC_PATH . '/shared');
 
 // Assign the root URL to a PHP constant
-// * Do not need to include the domain
-// * Use same document root as webserver
-// * Can set a hardcoded value:
 // * Can dynamically find everything in URL up to "/public"
 $private_end = strpos($_SERVER['SCRIPT_NAME'], '/Private');
 $doc_root = substr($_SERVER['SCRIPT_NAME'],0,$private_end) . '/Public/';
 define("WWW_ROOT", $doc_root);
 
+require_once("functions.php");

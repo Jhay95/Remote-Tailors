@@ -11,8 +11,8 @@ SQL;
 
 // Test tailor table
 $res = get_tailor();
-while($row = $res->fetch_assoc()){
-    echo "<h6>" . $row["tailor_fname"]. " " . $row["tailor_lname"] . "</h6>". "<br>";
+while ($row = $res->fetch_assoc()) {
+    echo "<h6>" . $row["tailor_fname"] . " " . $row["tailor_lname"] . "</h6>" . "<br>";
 }
 
-print_r($res);
+
