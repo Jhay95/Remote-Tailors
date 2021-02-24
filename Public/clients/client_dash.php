@@ -1,10 +1,9 @@
-<!--HTML !Doc Starts here-->
-<?php
+ <?php
 require_once("../head.php");
 ?>
 
 <!-- Brand Logo Section -->
-<nav class="navbar navbar-light bg-light navbar-expand-lg ">
+<nav class="navbar navbar-light bg-light navbar-expand-md">
     <a class="navbar-brand" href="#">Remote Tailor</a>
      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
     </button>
@@ -17,13 +16,8 @@ require_once("../head.php");
 </nav>
 
  <main>
-   <form class="btn action =../action_page.php d-flex justify-content-end">
-     <a href="#" class="btn btn-light" role="button">FIND ME A TAILOR</a>    
-   </form>
-    
-      <div class="container row">
-        <div class="col d-flex justify-content-between">
-       <div class= "list-group col-10 d-flex justify-content-start">
+    <div class="row ">
+         <div class= "list-group col-7 d-inline-block boot-box boot-box-border-width border border-secondary rounded">
           <li class="list-group-item">User Name:</li>
           <li class="list-group-item">Name:</li>
           <li class="list-group-item">Gender:</li>
@@ -31,12 +25,16 @@ require_once("../head.php");
           <li class="list-group-item">Email:</li>
           <li class="list-group-item">Phone Number:</li>
         </div>
-          
-         <div class="list-group col-4 d-flex justify-content-end">
-            <a href="#" class="list-group-item disabled list-group-item-action">Place Order</a>
-            <a href="#" class="list-group-item disabled list-group-item-action diactivate">Contact Us</a>
-            <a href="#" class="list-group-item list-group-item-action">My Orders</a>
-            <a href="#" class="list-group-item list-group-item-action">My Tailors</a>
+         
+         
+         <div class="list-group col-5 d-inline-block boot-box boot-box-border-width border border-secondary rounded d-flex justify-content-end mt-0"> 
+            <form class="btn action =../action_page.php d-flex justify-content-center">
+             <a href="#" class="btn btn-light" role="button">FIND ME A TAILOR</a>    
+           </form>
+            <a href="#" class="list-group-item disabled list-group-item-action d-flex justify-content-center ">Place Order</a>
+            <a href="#" class="list-group-item disabled list-group-item-action diactivate d-flex justify-content-center">Contact Us</a>
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-center">My Orders</a>
+            <a href="#" class="list-group-item list-group-item-action d-flex justify-content-center">My Tailors</a>
          </div>
          </div>
         
@@ -46,7 +44,7 @@ require_once("../head.php");
     
     <!-- Footer-->
  <?php
-require_once("../footer.php");
+require_once('../footer.php')
 ?>
 
 
