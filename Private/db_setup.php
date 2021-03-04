@@ -1,8 +1,8 @@
 <?php
-require_once('db_credential.php');
+require_once('functions.php');
 
 // Create connection - OOP Mysqli Programming
-$conn = new mysqli(servername, username, password);
+$conn = db_connect();
 
 
 if (isset($conn)) {

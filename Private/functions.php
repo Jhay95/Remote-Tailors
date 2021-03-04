@@ -1,18 +1,20 @@
 <?php
 require_once('db_credential.php');
 
-
 // Database connections
 function db_connect(): mysqli
 {
     $conn = new mysqli(servername, username, password, dbname);
     if (isset($conn)) {
-        if (!$conn) {
-            echo 'Error 503: ' . $conn->error;
+        if ($conn -> connect_errno) {
+            echo "Failed to connect to Database: " . $mysqli -> connect_error;
+            exit();
         }
     }
     return $conn;
 }
+
+
 
 // get tailor table
 function get_tailor(): mysqli_result|bool
@@ -24,27 +26,36 @@ function get_tailor(): mysqli_result|bool
     return $conn->query($sql);
 }
 
+// get tailor table but only tailors that sow for men
+function get_men(): mysqli_result|bool
+{
+    $sql = <<<SQL
+    SELECT * FROM tailors WHERE `tailor_pref`='Male';
+    SQL;
+    $conn = db_connect();
+    return $conn->query($sql);
+}
 
-// Send Form data to database
+// get tailor table but only tailors that sow for women
+function get_women(): mysqli_result|bool
+{
+    $sql = <<<SQL
+    SELECT * FROM tailors WHERE `tailor_pref`='Female';
+    SQL;
+    $conn = db_connect();
+    return $conn->query($sql);
+}
 
-//$fname = $_POST["fname"];
-//$lname = $_POST["lname"];
-//$email = $_POST["email"];
-//$uname = $_POST["uname"];
-//$pass = $_POST["password"];
-//
-//function tailor_data() {
-//    // get data from tailor's registration form
-//}
-//
-//function visitor_data() {
-//    //get data from visitors registration form
-//}
-//
-//function validate_register() {
-//    // if submit id == "submit-tailor"
-//    tailor_data();
-//
-//    //else
-//    visitor_data();
-//}
+// Validate login
+function login_validate($email,$password): mysqli_result|bool
+{
+    // Check to see if details exist in database
+    if ($_POST["submit-tailor"]) {
+        $sql = "SELECT `tailor_id` FROM `tailors` WHERE `tailor_email` = '" . $email . "' and `tailor_password` = '" . $password . "'";
+    } /*else {
+        $sql = "SELECT `tailor_id` FROM `customer` WHERE `tailor_email` = '" . $email . "' and `tailor_password` = '" . $password . "'";
+    }*/
+    $conn = db_connect();
+    return $conn->query($sql);
+}
+

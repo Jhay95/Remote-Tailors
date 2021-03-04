@@ -1,3 +1,12 @@
+<?php
+session_start();					//retrieve or create session
+
+if (isset($_SESSION["user"]))			//user name must in session to stay here
+{
+    $username=$_SESSION["user"];		//get user name into variable $username
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,5 +18,8 @@
 </head>
 <body>
 <h1>Tailors Dashboard: Coming Soon!!</h1>
+<form method="get" action="logout.php">
+    <button type="submit" name="logout">logout!</button>
+</form>
 </body>
 </html>
