@@ -1,7 +1,5 @@
 <?php
-require_once('../Private/initialize.php');
-
-session_start();
+/*session_start();
 
 $www = WWW_ROOT;
 $auth = 'tailors/index.php';
@@ -12,17 +10,17 @@ if (IsSet($_SESSION["user"]))			//if username exists in session, user has logged
     header("Location: $auth");		//forward to use home page
     exit();
 }
-?>
+*/?>
 
 <!---!DOC HTML Starts here--->
 <?php
-require_once('head.php');
+require_once(INC_PATH . 'head.php');
 ?>
 
 <!--Carousel/Banner ---->
 <header>
     <?php
-    require_once("navigation.php");
+    require_once(INC_PATH . 'navigation.php');
     ?>
 
     <div class="banner" id="login">
@@ -88,7 +86,7 @@ require_once('head.php');
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-tailor" role="tabpanel"
                              aria-labelledby="nav-tailor-tab">
-                            <form class="container" action="../Private/validate.php" method="post">
+                            <form class="container" action="../../controllers/validate.php" method="post">
 
                                 <div class="form-group">
                                     <label for="email">Email address</label>
@@ -106,7 +104,7 @@ require_once('head.php');
 
                         <div class="tab-pane fade show" id="nav-customer" role="tabpanel"
                              aria-labelledby="nav-customer-tab">
-                            <form class="container" action="../Private/validate.php" method="post">
+                            <form class="container" action="../../controllers/validate.php" method="post">
 
                                 <div class="form-group">
                                     <label for="email">Email address</label>
@@ -128,5 +126,5 @@ require_once('head.php');
     </div>
 </section>
 <?php
-require_once('footer.php');
+require_once(INC_PATH . 'footer.php');
 ?>

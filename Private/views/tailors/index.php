@@ -1,4 +1,12 @@
- <!DOCTYPE html>
+<?php
+session_start();					//retrieve or create session
+
+if (isset($_SESSION["user"]))			//user name must in session to stay here
+{
+    $username=$_SESSION["user"];		//get user name into variable $username
+}
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Remote Tailor Application</title>
@@ -36,7 +44,7 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
         <li class=""><a href="#">MyAccount</a></li>
-        <li><a href="#">SignOut</a></li>
+        <li><a href="#">Sign0ut</a></li>
       </ul>
     </div>
   </div>

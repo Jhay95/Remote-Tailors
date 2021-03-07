@@ -1,10 +1,10 @@
 <!--https://codewithawa.com/posts/complete-user-registration-system-using-php-and-mysql-database-->
 <?php
 session_start();
-require_once("initialize.php");
+require_once("config.php");
 
 $auth = WWW_ROOT . "tailors/index.php";    // use URL if access is granted
-$unauth = WWW_ROOT . "register.php";          // use URL if access is not granted
+$unauth = WWW_ROOT . "form_register.php";          // use URL if access is not granted
 $conn = db_connect();
 
 if (isset($_POST)) {

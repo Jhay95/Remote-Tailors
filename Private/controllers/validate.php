@@ -7,7 +7,7 @@ This script receives a post request from the login form and carries out the foll
 -->
 
 <?php
-require_once('initialize.php');
+require_once('config.php');
 
 session_start(); // Start Session
 

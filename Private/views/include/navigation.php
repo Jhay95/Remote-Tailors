@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <!-- Logo Section -->
-        <a class="navbar-brand" href="index.php"><span class="text">Remote Tailor</span></a>
+        <a class="navbar-brand" href="<?= URL_ROOT?>pages/index.php"><span class="text">Remote Tailor</span></a>
 
         <!-- Navigation Section -->
         <div class="row">
@@ -19,17 +19,17 @@
                         <ul class="navbar-nav ml-auto">
                             <!---Clinton Changed ml-auto to justify-content-end --->
                             <li class="nav-item">
-                                <a class="nav-link" href="index.php">Home</a>
+                                <a class="nav-link" href="<?= URL_ROOT?>pages/index">Home</a>
 
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about_us.php">About Us</a>
+                                <a class="nav-link" href="<?= URL_ROOT?>pages/about">About Us</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="men.php">Men</a>
+                                <a class="nav-link" href="<?= URL_ROOT?>pages/men">Men</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="women.php">Women</a>
+                                <a class="nav-link" href="<?= URL_ROOT?>pages/women">Women</a>
                             </li>
                             </li>
                         </ul>
@@ -43,10 +43,10 @@
                     <ul class="navbar-nav ml-auto">
                         <!--Clinton Changed ml-auto to justify-content-end-->
                         <li class="nav-item">
-                            <a class="nav-link" href="register.php">Register</a>
+                            <a class="nav-link" href="<?= URL_ROOT?>pages/register">Register</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="login.php">Sign in</a>
+                            <a class="nav-link" href="<?= URL_ROOT?>pages/signin">Sign in</a>
                         </li>
                     </ul>
                 </div>

@@ -1,12 +1,8 @@
-<?php
-require_once('head.php');
-?>
+<?php require_once(INC_PATH .  'head.php'); ?>
 
 <!--Carousel/Banner ---->
 <header>
-    <?php
-    require_once("navigation.php");
-    ?>
+    <?php require_once(INC_PATH . 'navigation.php'); ?>
 
     <div class="banner" id="register">
 
@@ -134,5 +130,5 @@ require_once('head.php');
     </div>
 </section>
 <?php
-require_once('footer.php');
+require_once(INC_PATH . 'footer.php');
 ?>
