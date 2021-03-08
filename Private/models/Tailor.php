@@ -17,6 +17,7 @@ class Tailor
         $this->db = new Database;
     }
 
+
     // Get all tailors in Database
     public function getTailors(): array
     {
@@ -51,11 +52,45 @@ class Tailor
     // Get tailors by Email
     public function getTailorByEmail($email): bool
     {
-        $this->db->query("SELECT * FROM customers WHERE customer_email = '$email'");
+        $this->db->query("SELECT * FROM tailors WHERE tailor_email = '$email'");
         //check row
-        if ($this->db->affected_rows() > 0) {
+        if ($this->db->rows_count() > 0) {
             return true;
         } else return false;
+    }
+
+    // Get tailors by Username
+    public function getTailorByUser($username): bool
+    {
+        $this->db->query("SELECT * FROM tailors WHERE tailor_username = '$username'");
+        //check row
+        if ($this->db->rows_count() > 0) {
+            return true;
+        } else return false;
+    }
+
+    public function register($data): bool
+    {
+        $sql = "INSERT INTO tailors (tailor_id, tailor_fname ,tailor_lname, tailor_email,tailor_username, tailor_password,tailor_reg_date) 
+                  VALUES (NULL, '" . $data['fname'] . "', '" . $data['lname'] . "','" . $data['email'] . "','" . $data['username'] . "','" . $data['password'] . "',CURRENT_TIMESTAMP)";
+
+
+        /*(NULL, '" . $data['fname'] . "', '" . $data['lname'] . "','" . $data['email'] . "','" . $data['username'] . "','" . $data['password'] . "',CURRENT_TIMESTAMP)*/
+        // Execute
+        if ($this->db->query($sql)) {
+            return $this->db->last_insert_id();
+        } else return false;
+    }
+
+    // Login User
+    public function login($email, $password): array
+    {
+        $this->db->query("SELECT * FROM tailors WHERE tailor_email = '$email'");
+        $row = $this->db->single_result();
+        $hashed_password = $row['tailor_password'];
+        if($password === $hashed_password){
+            return $row;
+        }
     }
 
     // Get tailors by ID
@@ -64,23 +99,4 @@ class Tailor
         $this->db->query("SELECT * FROM tailors WHERE tailor_id = '$id'");
         return $this->db->single_result();
     }
-
-    /*    public function register($data): bool
-        {
-            $this->db->query('INSERT INTO tailors (tailor_fname, tailor_lname, tailor_email, tailor_username, tailor_password) VALUES($data['fname'], ['lname'], $data['email'], $data['uname'], $data['pass'])');
-        }*/
-    /*
-        public function login($email,  $password)
-          {
-              $this->db->query('SELECT *FROM customers WHERE customer_email=?');
-              $this->db->bind([$email]);
-              $row = $this->db->single();
-              $hashed_password = $row->password;
-              if (password_verify($password, $hashed_password)) {
-                  return $row;
-              } else {
-                  return false;
-              }
-          }
-    */
 }
