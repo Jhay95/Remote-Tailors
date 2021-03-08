@@ -102,12 +102,16 @@ class Database
     // Get single record as object
     public function single_result(): ?array
     {
-        return $this->stmt->fetch();
+        return $this->stmt->fetch_assoc();
     }
 
     // Get number of rows affected by query
-    public function affected_rows() {
+    public function rows_affected() {
         return $this->stmt->affected_rows;
+    }
+    // Get number of rows returned by query
+    public function rows_count() {
+        return $this->stmt->num_rows;
     }
 
     // Get last inserted ID
@@ -117,11 +121,9 @@ class Database
     }
 
     // Output any connection error
-    public function error($error)
+    public function error()
     {
-        if ($this->show_error) {
-            exit($error);
-        }
+        return  $this->stmt->connect_error();
     }
 
     // Get variable type
