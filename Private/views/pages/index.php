@@ -25,7 +25,6 @@ require_once(INC_PATH ."filter.php")
     <div class="container">
         <div class="row">
             <?php foreach($data['tailors'] as $tailor) :?>
-
                 <div class="col-sm-4">
                     <div class="row t-card">
                         <div class="col-sm-5">
@@ -44,7 +43,6 @@ require_once(INC_PATH ."filter.php")
             <?php endforeach; ?>
         </div>
     </div>
-
 </section>
 
 
