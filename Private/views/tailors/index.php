@@ -1,54 +1,11 @@
+<!---!DOC HTML Starts here--->
 <?php
-session_start();					//retrieve or create session
-
-if (isset($_SESSION["user"]))			//user name must in session to stay here
-{
-    $username=$_SESSION["user"];		//get user name into variable $username
-}
+require_once(INC_PATH . 'head.php');
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Remote Tailor Application</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Add a gray background color and some padding to the footer */
-    footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
-  </style>
-</head>
-<body>
 
-<nav class="navbar navbar-default bg-light">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">Remote Tailor</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
-        <li class=""><a href="#">MyAccount</a></li>
-        <li><a href="#">Sign0ut</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<?php
+require_once(INC_PATH . 'navigation.php');
+?>
 
 <div class="container-fluid bg-3 text-center well well-sm">
  <div class="row border border-dark">
@@ -56,7 +13,7 @@ if (isset($_SESSION["user"]))			//user name must in session to stay here
        <div class="card text-justify" style="width:18rem;">
          <div class="card-body">
           <h6 class="card-title">SHOP NAME</h6>
-          <img class="card-img-botton" src="Capture.JPG" alt="Card image">
+          <img class="card-img-button" src="Capture.JPG" alt="Card image">
           </div>
           </div> 
     </div>
@@ -64,10 +21,10 @@ if (isset($_SESSION["user"]))			//user name must in session to stay here
     <div class="col-sm-5">
        <div class="card text-left" style="width:200px ">
           <div class="card-body">
-          <h6 class="card-text">NAME</h6>
-          <h6 class="card-text">LOCATION</h6>
-          <h6 class="card-text">GENDER PREFERENCE</h6>
-          <h6 class="card-text">STYLE</h6>
+          <h6 class="card-text">NAME: <em><?php echo $data['tailor']['tailor_fname'] . " " . $data['tailor']['tailor_lname']; ?><em></h6>
+          <h6 class="card-text">LOCATION: <em><?php echo $data['tailor']['tailor_city']; ?></em></h6>
+          <h6 class="card-text">GENDER PREFERENCE: : <em><?php echo $data['tailor']['tailor_pref']; ?></em></h6>
+          <h6 class="card-text">STYLE: <em><?php echo $data['tailor']['tailor_style']; ?></em></h6>
           </div>
         </div> 
     </div>
@@ -76,8 +33,8 @@ if (isset($_SESSION["user"]))			//user name must in session to stay here
        <div class="card text-left" style="width:200px ">
           <div class="card-body">
           <h6 class="card-text">RATE ME:</h6>
-          <h6 class="card-text">EMAIL:</h6>
-              <h6 class="card-text">PHONE:</h6>
+          <h6 class="card-text">EMAIL: <em><?php echo $data['tailor']['tailor_email']; ?></em></h6>
+              <h6 class="card-text">PHONE: <em><?php echo $data['tailor']['tailor_phone']; ?></em></h6>
           </div>
         </div> 
     </div>
@@ -167,14 +124,6 @@ if (isset($_SESSION["user"]))			//user name must in session to stay here
 </div>
 
 <!--  footer -->
-<footer class="container-fluid bg-3 text-center">
-        <div class="row">
-            <div class="col-sm-3">&copy; Copyright <?php echo date("Y"); ?> </div>
-            <div class="col-sm-3">Terms & Conditions</div>
-            <div class="col-sm-3">Contact Us</div>
-            <div class="col-sm-3">Feedback</div>
-        </div>
-</footer>
-
-</body>
-</html>
+<?php
+require_once(INC_PATH . 'footer.php');
+?>
