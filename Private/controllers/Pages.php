@@ -12,6 +12,7 @@ class Pages extends Controller
         $this->tailorModel = $this->model('Tailor');
     }
 
+
     public function index(){
         $tailors = $this->tailorModel->getTailors();
         $data = [
@@ -36,15 +37,8 @@ class Pages extends Controller
         $this->view('pages/form_register', $data);
     }
 
-    public function signin(){
-        $data = [
-            'title' => 'Sign in'
-        ];
-        $this->view('pages/login', $data);
-    }
-
     public function men(){
-        $tailors = $this->tailorModel->getTailorsByPref('Male');;
+        $tailors = $this->tailorModel->getTailorsByPref('Male');
         $data = [
             'title' => 'For Men',
             'tailors' => $tailors
@@ -60,4 +54,5 @@ class Pages extends Controller
         ];
         $this->view('pages/women', $data);
     }
+
 }
