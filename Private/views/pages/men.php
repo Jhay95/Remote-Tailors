@@ -1,20 +1,13 @@
-<?php
-require_once('../Private/functions.php');
-
-// Test tailor data
-$res = get_men();
-?>
-
 <!--HTML !Doc Starts here-->
 <?php
-require_once('head.php');
+require_once(INC_PATH . 'head.php');
 ?>
 
 
 <!--Carousel/Banner ---->
 <header>
     <?php
-    require_once("navigation.php");
+    require_once(INC_PATH . 'navigation.php');
     ?>
 
     <div class="banner" id="men">
@@ -24,7 +17,7 @@ require_once('head.php');
 
 <!--- Filter bar ---->
 <?php
-require_once("filter.php")
+require_once(INC_PATH . 'filter.php')
 ?>
 
 
@@ -32,7 +25,7 @@ require_once("filter.php")
 <section class="content">
     <div class="container">
         <div class="row">
-            <?php while ($row = $res->fetch_assoc()) { ?>
+            <?php foreach ($data['tailors'] as $tailor): ?>
                 <div class="col-sm-4">
                     <div class="row t-card">
                         <div class="col-sm-5">
@@ -40,19 +33,19 @@ require_once("filter.php")
                         </div>
 
                         <div class="col-sm-7">
-                            <?php echo "<br>" . "<h6><strong>Name: </strong><em>" . $row["tailor_fname"] . " " . $row["tailor_lname"] . "</em></h6>";
-                            echo "<h6><strong>Location:</strong><em>" . $row["tailor_city"] . "</em></h6>";
-                            echo "<h6><strong>Specialty:</strong><em>" . $row["tailor_style"] . "</em></h6>";
-                            ?>
+                            <br>
+                            <h6><strong>Name: </strong><em><?= $tailor["tailor_fname"] . " " . $tailor["tailor_lname"]; ?></em></h6>
+                            <h6><strong>Location:</strong><em><?= $tailor["tailor_city"]; ?></em></h6>
+                            <h6><strong>Specialty:</strong><em><?= $tailor["tailor_style"]; ?></em></h6>
                             <button type="submit" class="btn btn-secondary btn-sm" name="see-tailor">see more</button>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
 
 <?php
-require_once('footer.php');
+require_once(INC_PATH . 'footer.php');
 ?>
