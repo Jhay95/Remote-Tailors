@@ -14,9 +14,9 @@ if ($conn->connect_error) {
 
 # First Dummy Tailor Data input
 $sql = "INSERT INTO `tailors` (`tailor_id`, `tailor_fname` ,`tailor_lname`, `tailor_email`, `tailor_gender`, `tailor_style`,
-`tailor_phone`, `tailor_address`,`tailor_city`, `tailor_pref`, `tailor_username`, `tailor_password`, `tailor_reg_date`) 
-VALUES (NULL,'ken', 'Wood','ken@gmail.com','Male', 'English',0869754326,'Kingsway Palace', 'Belfast', 'Male', 'kennywood','kennykyu6479',CURRENT_TIMESTAMP),
-(NULL,'Dennis', 'Woody','deny@gmail.com','Male', 'English',0869754326,'Kingsway Palace', 'Belfast', 'Male,Female', 'deenness','dennel6479',CURRENT_TIMESTAMP)";
+`tailor_phone`, `tailor_address`,`tailor_city`, `tailor_pref`, `tailor_username`, `tailor_password`, `tailor_reg_date`,`tailor_modify_date`) 
+VALUES (NULL,'ken', 'Wood','ken@gmail.com','Male', 'English',0869754326,'Kingsway Palace', 'Belfast', 'Male', 'kennywood','kennykyu6479',CURRENT_TIMESTAMP, NULL),
+(NULL,'Dennis', 'Woody','deny@gmail.com','Male', 'English',0869754326,'Kingsway Palace', 'Belfast', 'Male,Female', 'deenness','dennel6479',CURRENT_TIMESTAMP, NULL)";
 
 
 if ($conn->query($sql) === TRUE) {
@@ -33,9 +33,9 @@ $i = 0;
 while (($data = fgetcsv($tailor_data, 1000)) !== FALSE) {
     if ($i > 0) {
         $import_tailor = "INSERT INTO `tailors` (`tailor_id`, `tailor_fname` ,`tailor_lname`, `tailor_email`, `tailor_gender`, `tailor_style`,
-                    `tailor_phone`, `tailor_address`,`tailor_city`, `tailor_pref`, `tailor_username`, `tailor_password`, `tailor_reg_date`) 
+                    `tailor_phone`, `tailor_address`,`tailor_city`, `tailor_pref`, `tailor_username`, `tailor_password`, `tailor_reg_date`, `tailor_modify_date`) 
                     VALUES (NULL,'" . $data[0] . "', '" . $data[1] . "','" . $data[2] . "','" . $data[6] . "', '" . $data[10] . "',
-                    '" . $data[3] . "','" . $data[4] . "', '" . $data[5] . "', '" . $data[7] . "', '" . $data[8] . "','" . $data[9] . "',CURRENT_TIMESTAMP)";
+                    '" . $data[3] . "','" . $data[4] . "', '" . $data[5] . "', '" . $data[7] . "', '" . $data[8] . "','" . $data[9] . "',CURRENT_TIMESTAMP, NULL)";
         $conn->query($import_tailor);
     }
     $i = 1;
