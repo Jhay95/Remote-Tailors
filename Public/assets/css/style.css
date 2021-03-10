@@ -72,14 +72,14 @@ a:hover {
     background-size: cover;
     height: 100%;
     overflow: hidden;
-    background: url('../images/pexels-andrea-piacquadio-3811855 (1).jpg') no-repeat center center;
+    background: url('../images/pexels-andrea-piacquadio-3811855.jpg') no-repeat center center;
 }
 
 #login {
     background-size: cover;
     height: 81vh;
     overflow: hidden;
-    background: url('../images/pexels-anete-lusina-4792070 (1).jpg') no-repeat center center;
+    background: url('../images/pexels-anete-lusina-4792070.jpg') no-repeat center center;
 }
 
 .reg-overlay {
