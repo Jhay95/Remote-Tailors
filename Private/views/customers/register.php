@@ -5,11 +5,11 @@
         <div class="col-md-5 reg-overlay">
             <div class="card bg-light">
                 <div class="card-header">
-                    <h2>Tailor | Create Account</h2>
+                    <h2>Customer | Create Account</h2>
                 </div>
             </div>
             <div class="card-body">
-                <form class="needs-validation" action="<?= URL_ROOT ?>tailors/signup"
+                <form class="needs-validation" action="<?= URL_ROOT ?>customers/signup"
                       method="post">
                     <div class="form-group">
                         <label for="fname">First Name</label>
@@ -50,7 +50,7 @@
                                name="password" value="<?php echo $data['password']; ?>">
                         <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="submit-tailor">Submit</button>
+                    <button type="submit" class="btn btn-primary" name="submit-customer">Submit</button>
                 </form>
             </div>
         </div>
@@ -59,3 +59,4 @@
 
 
 <?php require_once(INC_PATH . 'footer.php'); ?>
+

@@ -35,14 +35,6 @@
                                     <em><?php echo $data['tailor']['tailor_pref']; ?></em></h6>
                             </div>
 
-                            <div class="col-6">
-                                <br>
-                                <h6 class="card-text">
-                                    <strong>EMAIL: </strong><em><?php echo $data['tailor']['tailor_email']; ?></em></h6>
-                                <br>
-                                <h6 class="card-text">
-                                    <strong>PHONE: </strong><em><?php echo $data['tailor']['tailor_phone']; ?></em></h6>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -52,11 +44,9 @@
             <div class="col-sm-3">
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
-                        <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>profiles/edit/<?= $data['tailor']['tailor_id']?>">Edit Profile</a></button>
                         <br>
-                        <button type="button" class="btn btn-secondary"><a href="#">Upload Photo</a></button>
+                        <button type="button" class="btn btn-secondary"><a href="#">Contact</a></button>
                         <br>
-                        <button type="button" class="btn btn-secondary">Upload Works</button>
                     </div>
                 </div>
             </div>
@@ -87,17 +77,6 @@
                     <div class="col-sm-3">
                         <img src="http://via.placeholder.com/140x140" class="img-responsive" style="width:100%"
                              alt="Image">
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-3">
-                <div class="well well-sm text-center">
-                    <div class="btn-group-vertical">
-                        <br>
-                        <button type="button" class="btn btn-secondary">My Customers</button>
-                        <br>
-                        <button type="button" class="btn btn-secondary">My Orders</button>
                     </div>
                 </div>
             </div>
