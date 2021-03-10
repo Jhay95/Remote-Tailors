@@ -68,8 +68,32 @@ a:hover {
     background-image: url("../images/pexels-gustavo-fring-4173273.jpg");
 }
 
+#register {
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+    background: url('../images/pexels-andrea-piacquadio-3811855 (1).jpg') no-repeat center center;
+}
+
 #login {
-    background-image: url("../images/pexels-anete-lusina-4792070.jpg");
+    background-size: cover;
+    height: 81vh;
+    overflow: hidden;
+    background: url('../images/pexels-anete-lusina-4792070 (1).jpg') no-repeat center center;
+}
+
+.reg-overlay {
+     height: 80%;
+     margin-top: 60px;
+     overflow: hidden;
+     background: rgba(94, 86, 86, 0.5) center center;
+ }
+
+.log-overlay {
+    height: 80%;
+    margin-top: 60px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5) center center;
 }
 .content {
     margin: 20px 0 15px 0;

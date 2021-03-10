@@ -1,15 +1,14 @@
 <?php require_once(INC_PATH . 'head.php'); ?>
 <?php require_once(INC_PATH . 'navigation.php'); ?>
-<section class="container-fluid">
-    <div class="row row-full">
-        <div class="col-sm-3 col-md-6 col-lg-5">
-            <div class="left-col" id="register">
-
+<section id="register">
+    <div class="row justify-content-center">
+        <div class="col-md-5 reg-overlay">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h2>Tailor | Create Account</h2>
+                </div>
             </div>
-        </div>
-        <div class="col-sm-9 col-md-6 col-lg-7">
-            <div class="content col-md-10 justify-content-center">
-                <h2>Create Account</h2>
+            <div class="card-body">
                 <form class="needs-validation" action="<?= URL_ROOT ?>tailors/signup"
                       method="post">
                     <div class="form-group">

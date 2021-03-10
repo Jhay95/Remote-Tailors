@@ -6,9 +6,14 @@ require_once(INC_PATH . 'head.php');
 
 <section id="login">
     <div class="row justify-content-center">
-        <div class="col-md-5 align-self-center">
-            <h2>Sign in</h2>
-            <div>
+        <div class="col-md-5 log-overlay">
+            <div class="card bg-light">
+                <div class="card-header">
+                    <h2>Tailor | Sign in</h2>
+                </div>
+            </div>
+            <div class="card-body">
+
                 <form class="container" action="<?= URL_ROOT ?>tailors/signin" method="post">
                     <div class="form-group">
                         <label for="email">Email address</label>
