@@ -28,7 +28,7 @@
                                name="password" value="<?php echo $data['password']; ?>">
                         <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
                     </div>
-                    <input type="submit" class="btn btn-primary" name="submit-visitor">
+                    <input type="submit" class="btn btn-primary" name="submit">
                 </form>
             </div>
         </div>

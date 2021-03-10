@@ -70,10 +70,10 @@ class Tailor
     }
 
 
-    public function register($data): bool
+    public function register($data): int|string|bool
     {
-        $sql = "INSERT INTO tailors (tailor_id, tailor_fname ,tailor_lname, tailor_email,tailor_username, tailor_password,tailor_reg_date) 
-                  VALUES (NULL, '" . $data['fname'] . "', '" . $data['lname'] . "','" . $data['email'] . "','" . $data['username'] . "','" . $data['password'] . "',CURRENT_TIMESTAMP)";
+        $sql = "INSERT INTO tailors (tailor_fname ,tailor_lname, tailor_email,tailor_username, tailor_password) 
+                  VALUES ('" . $data['fname'] . "', '" . $data['lname'] . "','" . $data['email'] . "','" . $data['username'] . "','" . $data['password'] . "')";
 
         if ($this->db->query($sql)) {
             return $this->db->last_insert_id();
@@ -94,7 +94,7 @@ class Tailor
     }
 
     // Get tailors by ID
-    public function getTailorById($id): ?array
+    public function getTailorById($id): array
     {
         $this->db->query("SELECT * FROM tailors WHERE tailor_id = '$id'");
         return $this->db->single_result();
@@ -103,21 +103,20 @@ class Tailor
     public function update($id , $data): bool
     {
         $sql = "UPDATE tailors 
-                SET tailor_fname = {$data}['fname'],
-                    tailor_lname = {$data}['lname'],
-                    tailor_email = {$data}['email'],
-                    tailor_phone = {$data}['phone'],
-                    tailor_address = {$data}['address'], 
-                    tailor_city = {$data}['city'], 
-                    tailor_style = {$data}['style'], 
-                    tailor_gender = {$data}['gender'], 
-                    tailor_pref = {$data}['pref'], 
+                SET tailor_fname = '".$data['fname']."',
+                    tailor_lname = '".$data['lname']."',
+                    tailor_email = '".$data['email']."',
+                    tailor_phone = '".$data['phone']."',
+                    tailor_address = '".$data['address']."', 
+                    tailor_city = '".$data['city']."', 
+                    tailor_style = '".$data['style']."', 
+                    tailor_gender = '".$data['gender']."', 
+                    tailor_pref = '".$data['pref']."', 
                     tailor_modify_date = CURRENT_TIMESTAMP
                 WHERE tailor_id = '$id'";
 
         if ($this->db->query($sql)) {
-            echo "Successful";
             return true;
-        } else echo 'Not successful'; return false;
+        } else return false;
     }
 }
