@@ -26,7 +26,8 @@ tailor_city VARCHAR(64) ,
 tailor_pref SET('Male', 'Female') ,
 tailor_username VARCHAR(32) NOT NULL UNIQUE ,
 tailor_password VARCHAR(16) NOT NULL ,
-tailor_reg_date DATETIME DEFAULT NOW()
+tailor_reg_date DATETIME DEFAULT NOW(),
+tailor_modify_date DATETIME 
 )
 SQL;
 
@@ -43,7 +44,8 @@ customer_address VARCHAR(128) ,
 customer_city VARCHAR(64) ,
 customer_username VARCHAR(32) NOT NULL UNIQUE ,
 customer_password VARCHAR(16) NOT NULL ,
-customer_reg_date DATETIME DEFAULT NOW()
+customer_reg_date DATETIME DEFAULT NOW(),
+customer_modify_date DATETIME                                    
 )
 SQL;
 
