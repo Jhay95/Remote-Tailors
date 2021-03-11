@@ -82,7 +82,7 @@
                         </select>
                     </div>
                     <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-primary" name="submit-tailor">Submit</button>
+                        <input type="submit" class="btn btn-primary" name="submit">
                     </div>
                 </form>
             </div>

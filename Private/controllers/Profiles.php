@@ -2,11 +2,15 @@
 class Profiles extends Controller {
 
     private $tailorModel;
+    /**
+     * @var mixed
+     */
+
 
     public function __construct(){
-        if(loggedin()){
-            $this->id = $_SESSION['id'];
-        } else header('location: ' . URL_ROOT . 'tailors/signin');
+       if(!loggedin()){
+            header('location: ' . URL_ROOT . 'tailors/signin');
+        }
 
         $this->tailorModel = $this->model('Tailor');
     }

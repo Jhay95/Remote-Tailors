@@ -33,15 +33,15 @@ class Customer
         }
     }
 
-    public function getCustomerById($id): ?array
+    public function getCustomerById($id): array
     {
-        $this->db->query("SELECT * FROM customers WHERE customer_email = '$id'");
+        $this->db->query("SELECT * FROM customers WHERE customer_id = '$id'");
         return $this->db->single_result();
     }
 
     public function register($data): bool|int|string
     {
-        $sql = "INSERT INTO customers (customer_id, customer_fname, customer_lname, customer_email, customer_username, customer_password, customer_reg_date) VALUES (NULL, '" . $data['fname'] . "', '" . $data['lname'] . "','" . $data['email'] . "','" . $data['username'] . "','" . $data['password'] . "',CURRENT_TIMESTAMP)";
+        $sql = "INSERT INTO customers (customer_fname, customer_lname, customer_email, customer_username, customer_password) VALUES ('" . $data['fname'] . "', '" . $data['lname'] . "','" . $data['email'] . "','" . $data['username'] . "','" . $data['password'] . "')";
         if ($this->db->query($sql)) {
             return $this->db->last_insert_id();
         } else return false;
