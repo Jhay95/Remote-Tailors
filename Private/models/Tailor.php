@@ -59,6 +59,15 @@ class Tailor
         } else return false;
     }
 
+    public function findTailorByEmail($email): bool
+    {
+        $this->db->query("SELECT * FROM tailors WHERE tailor_email = '$email'");
+        //check row
+        if ($this->db->rows_count() > 1) {
+            return true;
+        } else return false;
+    }
+
     // Get tailors by Username
     public function getTailorByUser($username): bool
     {
@@ -100,7 +109,7 @@ class Tailor
         return $this->db->single_result();
     }
 
-    public function update($id , $data): bool
+    public function update($data): bool
     {
         $sql = "UPDATE tailors 
                 SET tailor_fname = '".$data['fname']."',
@@ -113,10 +122,10 @@ class Tailor
                     tailor_gender = '".$data['gender']."', 
                     tailor_pref = '".$data['pref']."', 
                     tailor_modify_date = CURRENT_TIMESTAMP
-                WHERE tailor_id = '$id'";
+                WHERE tailor_id = '".$data['id']."'";
 
         if ($this->db->query($sql)) {
             return true;
-        } else return false;
+        } else die("Query failed: " . $this->db->error());
     }
 }

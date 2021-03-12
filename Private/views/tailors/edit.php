@@ -7,14 +7,14 @@
         <div class="justify-content-center">
             <h2>Update Information</h2>
             <div>
-                <form class="row g-3 needs-validation" action="<?= URL_ROOT ?>profiles/update/<?=$data['tailor']['tailor_id']?>"
+                <form class="row g-3 needs-validation" action="<?= URL_ROOT ?>profiles/edit/<?=$data['id']?>"
                       method="post">
 
                     <div class="form-group col-md-6">
                         <label for="fname">First Name</label>
                         <input type="text" name="fname"
                                class="form-control <?php echo (!empty($data['fname_err'])) ? 'is-invalid' : ''; ?>"
-                               value="<?php echo $data['tailor']['tailor_fname']; ?>">
+                               value="<?php echo $data['fname']; ?>">
                         <span class="invalid-feedback"><?php echo $data['fname_err']; ?></span>
                     </div>
 
@@ -22,7 +22,7 @@
                         <label for="lname">Last Name</label>
                         <input type="text"
                                class="form-control <?php echo (!empty($data['lname_err'])) ? 'is-invalid' : ''; ?>"
-                               name="lname" value="<?php echo $data['tailor']['tailor_lname']; ?>">
+                               name="lname" value="<?php echo $data['lname']; ?>">
                         <span class="invalid-feedback"><?php echo $data['lname_err']; ?></span>
                     </div>
 
@@ -30,7 +30,7 @@
                         <label for="email">Email address</label>
                         <input type="email"
                                class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>"
-                               name="email" value="<?php echo $data['tailor']['tailor_email']; ?>">
+                               name="email" value="<?php echo $data['email']; ?>">
                         <span class="invalid-feedback"><?php echo $data['email_err']; ?></span>
                     </div>
 
@@ -38,7 +38,7 @@
                         <label for="phone">Phone Number</label>
                         <input type="number"
                                class="form-control <?php echo (!empty($data['phone_err'])) ? 'is-invalid' : ''; ?>"
-                               name="phone" value="<?php echo $data['tailor']['tailor_phone']; ?>">
+                               name="phone" value="<?php echo $data['phone']; ?>">
                         <span class="invalid-feedback"><?php echo $data['phone_err']; ?></span>
                     </div>
 
@@ -46,14 +46,14 @@
                         <label for="address">Address</label>
                         <input type="text"
                                class="form-control"
-                               name="address" value="<?php echo $data['tailor']['tailor_address']; ?>">
+                               name="address" value="<?php echo $data['address']; ?>">
                     </div>
 
                     <div class="form-group col-md-6">
                         <label for="city">City</label>
                         <input type="text"
                                class="form-control"
-                               name="city" value="<?php echo $data['tailor']['tailor_city']; ?>">
+                               name="city" value="<?php echo $data['city']; ?>">
                     </div>
 
                     <div class="form-group col-md-6">
