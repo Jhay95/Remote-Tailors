@@ -9,7 +9,7 @@ if ($conn->connect_error) {
     if (isset($conn)) {
         die('Failed to connect to MySQL - ' . $conn->connect_error);
     }
-} else echo "Connected Successfully";
+} else echo "Connected Successfully.\n";
 
 
 # First Dummy Tailor Data input
@@ -20,7 +20,7 @@ VALUES (NULL,'ken', 'Wood','ken@gmail.com','Male', 'English',0869754326,'Kingswa
 
 
 if ($conn->query($sql) === TRUE) {
-    echo "Insertion into tailors table updated successfully";
+    echo "Insertion into tailors table updated successfully.\n";
 } else {
     echo "Error inserting into table: " . $conn->error;
 }
