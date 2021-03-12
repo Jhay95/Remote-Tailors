@@ -65,7 +65,7 @@ class Database
     // Output any connection error
     public function error()
     {
-        return  $this->stmt->connect_error();
+        return $this->stmt->connect_error();
     }
 
 }

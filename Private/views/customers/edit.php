@@ -7,7 +7,7 @@
         <div class="justify-content-center">
             <h2>Update Information</h2>
             <div>
-                <form class="row g-3 needs-validation" action="<?= URL_ROOT ?>profiles/edit/<?=$data['id']?>"
+                <form class="row g-3 needs-validation" action="<?= URL_ROOT ?>customers/edit/<?=$data['id']?>"
                       method="post">
 
                     <div class="form-group col-md-6">
@@ -65,22 +65,6 @@
                         </select>
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label for="style">Style</label>
-                        <select class="form-select form-control" name="style" >
-                            <option value="English">English</option>
-                            <option value="Native">Native</option>
-                            <option value="Casual">Casual</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="pref">Gender Preference</label>
-                        <select class="form-select form-control" name="pref" >
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                        </select>
-                    </div>
                     <div class="form-group col-md-12">
                         <input type="submit" class="btn btn-primary" name="submit">
                     </div>

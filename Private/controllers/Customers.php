@@ -187,4 +187,90 @@ class Customers extends Controller
         session_destroy();
         header('location: ' . URL_ROOT . 'customers/signin');
     }
+
+    public function edit($id) {
+
+        // Check for POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // Process form
+            $data = [
+                'id' => $id,
+                'fname' => ucwords(trim($_POST['fname'])),
+                'lname' => ucwords(trim($_POST['lname'])),
+                'email' => strtolower(trim($_POST['email'])),
+                'phone' => trim($_POST['phone']),
+                'address' => trim($_POST['address']),
+                'city' => ucwords(trim($_POST['city'])),
+                'gender' => $_POST['gender'],
+                'fname_err' => '',
+                'lname_err' => '',
+                'email_err' => '',
+                'phone_err' => ''
+            ];
+
+            // Check if entries are empty
+            if (empty($data['fname'])) {
+                $data['fname_err'] = 'Please enter you First name';
+            }
+            if (empty($data['lname'])) {
+                $data['lname_err'] = 'Please enter your Last name';
+            }
+
+            if (empty($data['email'])) {
+                $data['email_err'] = 'Email can not be empty';
+            }
+
+            if (!empty($data['email'])) {
+                if ($customer = $this->custModel->findCustByEmail($data['email'])) {
+                    $data['email_err'] = 'This email address in invalid';
+                }
+            }
+
+            // Make sure errors are empty
+            if (empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err'])) {
+
+                // Update User
+                $updated = $this->custModel->update($data);
+
+                if ($updated) {
+                    // Create Session
+                    header('location: ' . URL_ROOT . 'customers/index/'. $id);
+                } else {
+                    die('Something happened!!, Unable to update profile');
+                }
+            } else {
+                $this->view('customers/edit', $data);
+            }
+
+
+        } else {
+            // retrieve customer data
+            $customer = $this->custModel->getCustomerById($id);
+
+            if (!$customer['customer_id'] == $_SESSION['id']) {
+                header('location' . URL_ROOT . 'pages');
+            }
+            // Init data
+            $data = [
+                'id' => $id,
+                'fname' => $customer['customer_fname'],
+                'lname' => $customer['customer_lname'],
+                'email' => $customer['customer_email'],
+                'phone' => $customer['customer_phone'],
+                'address' => $customer['customer_address'],
+                'city' => $customer['customer_city'],
+                'gender' => $customer['customer_gender'],
+                'fname_err' => '',
+                'lname_err' => '',
+                'email_err' => '',
+                'phone_err' => ''
+            ];
+
+            // Load view
+            $this->view('customers/edit', $data);
+        }
+    }
 }
