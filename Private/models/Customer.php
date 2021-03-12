@@ -22,6 +22,15 @@ class Customer
         }
     }
 
+    public function findCustByEmail($email): bool
+    {
+        $this->db->query("SELECT * FROM customers WHERE customer_email = '$email'");
+        //check row
+        if ($this->db->rows_count() > 1) {
+            return true;
+        } else return false;
+    }
+
     public function getCustByUser($username): bool
     {
         $this->db->query("SELECT * FROM customers WHERE customer_username = '$username'");
@@ -58,5 +67,23 @@ class Customer
         } else {
             false;
         }
+    }
+
+    public function update($data): bool
+    {
+        $sql = "UPDATE customers 
+                SET customer_fname = '".$data['fname']."',
+                    customer_lname = '".$data['lname']."',
+                    customer_email = '".$data['email']."',
+                    customer_phone = '".$data['phone']."',
+                    customer_address = '".$data['address']."', 
+                    customer_city = '".$data['city']."', 
+                    customer_gender = '".$data['gender']."',  
+                    customer_modify_date = CURRENT_TIMESTAMP
+                WHERE customer_id = '".$data['id']."'";
+
+        if ($this->db->query($sql)) {
+            return true;
+        } else return false;
     }
 }
