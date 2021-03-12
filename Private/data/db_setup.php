@@ -8,7 +8,7 @@ if ($conn->connect_error) {
     if (isset($conn)) {
         die('Failed to connect to MySQL - ' . $conn->connect_error);
     }
-} else echo "Connected Successfully";
+} else echo "Connected Successfully.\n";
 
 
 // Create Table - Tailor
@@ -27,7 +27,7 @@ tailor_pref SET('Male', 'Female') ,
 tailor_username VARCHAR(32) NOT NULL UNIQUE ,
 tailor_password VARCHAR(16) NOT NULL ,
 tailor_reg_date DATETIME DEFAULT NOW(),
-tailor_modify_date DATETIME 
+tailor_modify_date DATETIME DEFAULT NOW()
 )
 SQL;
 
@@ -45,7 +45,7 @@ customer_city VARCHAR(64) ,
 customer_username VARCHAR(32) NOT NULL UNIQUE ,
 customer_password VARCHAR(16) NOT NULL ,
 customer_reg_date DATETIME DEFAULT NOW(),
-customer_modify_date DATETIME                                    
+customer_modify_date DATETIME DEFAULT NOW()                                   
 )
 SQL;
 
