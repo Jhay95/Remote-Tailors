@@ -6,19 +6,19 @@
     <div class="container">
         <!---- Tailor profile---->
         <div class="row">
-            <div class="col-sm-9">
+            <div class="col-md-9">
                 <div class="row">
                     <!--Profile pics--->
-                    <div class="col-sm-3">
+                    <div class="col-md-3">
                         <div class="card-body">
                             <img src="http://via.placeholder.com/180x180" alt="Card image">
                         </div>
                     </div>
 
                     <!--Data information--->
-                    <div class="col-9">
+                    <div class="col-md-9">
                         <div class="row">
-                            <div class="col-sm-6">
+                            <div class="col-md-6">
                                 <br>
                                 <h6 class="card-text"><strong>NAME:</strong>
                                     <em><?php echo $data['tailor']['tailor_fname'] . " " . $data['tailor']['tailor_lname']; ?>
@@ -35,7 +35,7 @@
                                     <em><?php echo $data['tailor']['tailor_pref']; ?></em></h6>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 <br>
                                 <h6 class="card-text">
                                     <strong>EMAIL: </strong><em><?php echo $data['tailor']['tailor_email']; ?></em></h6>
@@ -49,7 +49,7 @@
             </div>
 
             <!----Modify Tailor profile---->
-            <div class="col-sm-3">
+            <div class="col-md-3">
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>profiles/edit/<?= $data['tailor']['tailor_id']?>">Edit Profile</a></button>

@@ -4,9 +4,9 @@ class Profiles extends Controller {
     private $tailorModel;
 
     public function __construct(){
-        if(loggedin()){
-            $this->id = $_SESSION['id'];
-        } else header('location: ' . URL_ROOT . 'tailors/signin');
+       if(!loggedin()){
+            header('location: ' . URL_ROOT . 'tailors/signin');
+        }
 
         $this->tailorModel = $this->model('Tailor');
     }
@@ -22,26 +22,17 @@ class Profiles extends Controller {
         $this->view('tailors/index', $data);
     }
 
-    public function edit($id){
-        // Get tailor
-        $tailor = $this->tailorModel->getTailorById($id);
 
-        $data = [
-            'tailor' => $tailor
-        ];
-
-        $this->view('tailors/edit', $data);
-    }
-
-    public function update($id) {
+    public function edit($id) {
 
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+            var_dump($_POST);
             // Process form
             $data = [
+                'id' => $_SESSION['id'],
                 'fname' => ucwords(trim($_POST['fname'])),
                 'lname' => ucwords(trim($_POST['lname'])),
                 'email' => strtolower(trim($_POST['email'])),
@@ -54,8 +45,8 @@ class Profiles extends Controller {
                 'fname_err' => '',
                 'lname_err' => '',
                 'email_err' => '',
-                'phone_err' => ''
             ];
+
 
             // Check if entries are empty
             if (empty($data['fname'])) {
@@ -68,48 +59,53 @@ class Profiles extends Controller {
             if (empty($data['email'])) {
                 $data['email_err'] = 'Email can not be empty';
             }
-            // Validate Password
-            if (!is_numeric($data['phone_err'])) {
-                $data['phone_err'] = 'Please enter a valid number';
-            }
 
             if (!empty($data['email'])) {
-                if ($tailors = $this->tailorModel->getTailorByEmail($data['email'])) {
+
+                if ($this->tailorModel->findTailorByEmail($data['email'])) {
                     $data['email_err'] = 'This email address in invalid';
                 }
             }
 
             // Make sure errors are empty
-            if (empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['phone_err'])) {
+            if (empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err'])) {
 
                 // Update User
-                $updated = $this->tailorModel->update($id, $data);
+                $updated = $this->tailorModel->update($data);
 
                 if ($updated) {
                     // Create Session
                     header('location: ' . URL_ROOT . 'profiles/index/'. $id);
                 } else {
-                    $this->view('tailors/edit', $data);
+                    die('Something happened!!, Unable to update profile');
                 }
+            } else {
+                // Load view
+                $this->view('tailors/edit', $data);
             }
 
-
         } else {
+            //Get existing tailor data
+            $tailor = $this->tailorModel->getTailorById($id);
+
+            if (!$tailor['tailor_id'] == $_SESSION['id']) {
+                header('location' . URL_ROOT . 'pages');
+            }
             // Init data
             $data = [
-                'fname' => '',
-                'lname' => '',
-                'email' => '',
-                'phone' => '',
-                'address' => '',
-                'city' => '',
-                'style' => '',
-                'gender' => '',
-                'pref' => '',
+                'id' => $id,
+                'fname' => $tailor['tailor_fname'],
+                'lname' => $tailor['tailor_lname'],
+                'email' => $tailor['tailor_email'],
+                'phone' => $tailor['tailor_phone'],
+                'address' => $tailor['tailor_address'],
+                'city' => $tailor['tailor_city'],
+                'style' => $tailor['tailor_style'],
+                'gender' => $tailor['tailor_gender'],
+                'pref' => $tailor['tailor_pref'],
                 'fname_err' => '',
                 'lname_err' => '',
                 'email_err' => '',
-                'phone_err' => ''
             ];
 
             // Load view

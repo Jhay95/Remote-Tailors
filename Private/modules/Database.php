@@ -59,13 +59,13 @@ class Database
     // Get last inserted ID
     public function last_insert_id(): int|string
     {
-        return $this->stmt->insert_id;
+        return $this->conn->insert_id;
     }
 
     // Output any connection error
     public function error()
     {
-        return  $this->stmt->connect_error();
+        return $this->stmt->connect_error();
     }
 
 }
