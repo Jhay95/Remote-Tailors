@@ -6,42 +6,39 @@
     <div class="container">
         <!---- Tailor profile---->
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-sm-9">
                 <div class="row">
                     <!--Profile pics--->
-                    <div class="col-md-3">
+                    <div class="col-sm-3">
                         <div class="card-body">
                             <img src="http://via.placeholder.com/180x180" alt="Card image">
                         </div>
                     </div>
 
                     <!--Data information--->
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-6">
+                    <div class="col-9">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
                                 <br>
                                 <h6 class="card-text"><strong>NAME:</strong>
-                                    <em><?php echo $data['tailor']['tailor_fname'] . " " . $data['tailor']['tailor_lname']; ?>
+                                    <em><?php echo $data['customer']['customer_fname'] . " " . $data['customer']['customer_lname']; ?>
                                         <em></h6>
                                 <br>
                                 <h6 class="card-text">
-                                    <strong>LOCATION: </strong><em><?php echo $data['tailor']['tailor_city']; ?></em>
+                                    <strong>LOCATION: </strong><em><?php echo $data['customer']['customer_city']; ?></em>
                                 </h6>
                                 <br>
-                                <h6 class="card-text"><strong>STYLE: </strong>
-                                    <em><?php echo $data['tailor']['tailor_style']; ?></em></h6>
-                                <br>
-                                <h6 class="card-text"><strong>GENDER PREFERENCE: </strong>
-                                    <em><?php echo $data['tailor']['tailor_pref']; ?></em></h6>
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <br>
                                 <h6 class="card-text">
-                                    <strong>EMAIL: </strong><em><?php echo $data['tailor']['tailor_email']; ?></em></h6>
+                                    <strong>EMAIL: </strong><em><?php echo $data['customer']['customer_email']; ?></em>
+                                </h6>
                                 <br>
                                 <h6 class="card-text">
-                                    <strong>PHONE: </strong><em><?php echo $data['tailor']['tailor_phone']; ?></em></h6>
+                                    <strong>PHONE: </strong><em><?php echo $data['customer']['customer_phone']; ?></em>
+                                </h6>
                             </div>
                         </div>
                     </div>
@@ -49,12 +46,12 @@
             </div>
 
             <!----Modify Tailor profile---->
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
-                        <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>profiles/edit/<?= $data['tailor']['tailor_id']?>">Edit Profile</a></button>
-                        <br>
-                        <button type="button" class="btn btn-secondary"><a href="#">Upload Photo</a></button>
+                        <button type="button" class="btn btn-secondary"><a
+                                    href="<?= URL_ROOT ?>customers/edit/<?php echo $data['customer']['customer_id'] ?>">Edit
+                                Profile</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">Upload Works</button>
                     </div>
@@ -70,7 +67,7 @@
         <!----Photo Gallery------>
         <div class="row">
             <div class="col-md-9">
-                <h3>Tailor's Works</h3>
+                <h3>My Orders</h3>
                 <div class="row">
                     <div class="col-sm-3">
                         <img src="http://via.placeholder.com/140x140" class="img-responsive" style="width:100%"
@@ -95,9 +92,12 @@
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <br>
-                        <button type="button" class="btn btn-secondary">My Customers</button>
+                        <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>pages/index">Find a
+                                Tailor</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">My Orders</button>
+                        <br>
+                        <button type="button" class="btn btn-secondary">My Tailors</button>
                     </div>
                 </div>
             </div>
@@ -109,3 +109,7 @@
 <?php
 require_once(INC_PATH . 'footer.php');
 ?>
+
+
+
+

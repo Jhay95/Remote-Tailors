@@ -25,7 +25,6 @@ require_once(INC_PATH ."filter.php")
     <div class="container">
         <div class="row">
             <?php foreach($data['tailors'] as $tailor) :?>
-
                 <div class="col-sm-4">
                     <div class="row t-card">
                         <div class="col-sm-5">
@@ -37,14 +36,13 @@ require_once(INC_PATH ."filter.php")
                             <h6><strong>Name: </strong><em><?php echo $tailor['tailor_fname'] . " " . $tailor['tailor_lname']; ?></em></h6>
                             <h6><strong>Location:</strong><em><?php echo $tailor['tailor_city']; ?></em></h6>
                             <h6><strong>Specialty:</strong><em><?php echo $tailor['tailor_style']; ?></em></h6>
-                            <button type="submit" class="btn btn-secondary btn-sm" name="see-tailor">see more</button>
+                            <button type="submit" class="btn btn-secondary btn-sm" name="see-tailor"><a href="<?= URL_ROOT ?>tailors/profile/<?= $tailor['tailor_id']?>">see more</a></button>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
-
 </section>
 
 

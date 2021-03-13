@@ -4,62 +4,86 @@
 class Customer
 {
 
-    private $db;
+    private Database $db;
 
-    /**
-     * User constructor.
-     * @param null $data
-     */
     public function __construct()
     {
         $this->db = new Database;
     }
     //find user through email
-    public function findCustByEmail($email)
+    public function getCustByEmail($email): bool
     {
-        // $this->db->bind(':email', $email);
-        $this->db->query('SELECT * FROM customers WHERE customer_email = ?');
-        $this->db->bind_val([$email]);
-        $this->db->execute_stmt();
-        $this->db->bind_res();
-        $row = $this->db->single_result();
+        $this->db->query("SELECT * FROM customers WHERE customer_email = '$email'");
         //check row
-        if ($this->db->affected_rows() > 0) {
+        if ($this->db->rows_count() > 0) {
             return true;
         } else {
             return false;
         }
     }
 
-    public function register($data)
+    public function findCustByEmail($email): bool
     {
-        $this->db->query('INSERT INTO customers (customer_fname, customer_lname, customer_email, customer_password) VALUES(?, ?, ?, ?)');
-        $this->db->bind([$data['fname'], ['lname'], $data['email'], $data['pass']]);
-        if ($this->db->execute_stmt()) {
+        $this->db->query("SELECT * FROM customers WHERE customer_email = '$email'");
+        //check row
+        if ($this->db->rows_count() > 1) {
+            return true;
+        } else return false;
+    }
+
+    public function getCustByUser($username): bool
+    {
+        $this->db->query("SELECT * FROM customers WHERE customer_username = '$username'");
+        //check row
+        if ($this->db->rows_count() > 0) {
             return true;
         } else {
             return false;
         }
     }
 
-  /*  public function login($email,  $password)
+    public function getCustomerById($id): array
     {
-        $this->db->query('SELECT *FROM customers WHERE customer_email=?');
-        $this->db->bind([$email]);
-        $row = $this->db->single();
-        $hashed_password = $row->password;
-        if (password_verify($password, $hashed_password)) {
+        $this->db->query("SELECT * FROM customers WHERE customer_id = '$id'");
+        return $this->db->single_result();
+    }
+
+    public function register($data): bool|int|string
+    {
+        $sql = "INSERT INTO customers (customer_fname, customer_lname, customer_email, customer_username, customer_password) VALUES ('" . $data['fname'] . "', '" . $data['lname'] . "','" . $data['email'] . "','" . $data['username'] . "','" . $data['password'] . "')";
+        if ($this->db->query($sql)) {
+            return $this->db->last_insert_id();
+        } else return false;
+    }
+
+    // Login User
+    public function login($email, $password): array
+    {
+        $this->db->query("SELECT * FROM customers WHERE customer_email = '$email'");
+        $row = $this->db->single_result();
+        $hashed_password = $row['customer_password'];
+        if($password === $hashed_password){
             return $row;
         } else {
-            return false;
+            false;
         }
     }
-    public function getUserbyId($user_id)
-    {
-        $this->db->query('SELECT * FROM users WHERE id= :user_id');
-        $this->db->bind(':user_id', $user_id);
 
-        $row = $this->db->single();
-        return $row;
-    }*/
+    public function update($data): bool
+    {
+        $sql = "UPDATE customers 
+                SET customer_fname = '".$data['fname']."',
+                    customer_lname = '".$data['lname']."',
+                    customer_email = '".$data['email']."',
+                    customer_phone = '".$data['phone']."',
+                    customer_address = '".$data['address']."', 
+                    customer_city = '".$data['city']."', 
+                    customer_gender = '".$data['gender']."',  
+                    customer_modify_date = CURRENT_TIMESTAMP
+                WHERE customer_id = '".$data['id']."'";
+
+        if ($this->db->query($sql)) {
+            return true;
+        } else return false;
+    }
 }

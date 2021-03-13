@@ -37,7 +37,7 @@ require_once(INC_PATH . 'filter.php')
                             <h6><strong>Name: </strong><em><?= $tailor["tailor_fname"] . " " . $tailor["tailor_lname"]; ?></em></h6>
                             <h6><strong>Location:</strong><em><?= $tailor["tailor_city"]; ?></em></h6>
                             <h6><strong>Specialty:</strong><em><?= $tailor["tailor_style"]; ?></em></h6>
-                            <button type="submit" class="btn btn-secondary btn-sm" name="see-tailor">see more</button>
+                            <button type="submit" class="btn btn-secondary btn-sm" name="see-tailor"><a href="<?= URL_ROOT ?>tailors/profile/<?= $tailor['tailor_id']?>">see more</a></button>
                         </div>
                     </div>
                 </div>

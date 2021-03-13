@@ -32,7 +32,7 @@ class Tailors extends Controller
                 'username_err' => '',
                 'password_err' => ''];
 
-            // Check if entries are empty
+            // Check if Names are empty
             if (empty($data['fname'])) {
                 $data['fname_err'] = 'Please enter you First name';
             }
@@ -40,44 +40,44 @@ class Tailors extends Controller
                 $data['lname_err'] = 'Please enter your Last name';
             }
 
+            // Validate Username
             if (empty($data['username'])) {
                 $data['username_err'] = 'Please enter a unique username';
+            } else {
+                if ($this->tailorModel->getTailorByUser($data['username'])) {
+                    $data['username_err'] = 'Please enter a unique username';
+                }
             }
 
+            // Validate Email
             if (empty($data['email'])) {
                 $data['email_err'] = 'Please enter email';
+            } else {
+                if ($this->tailorModel->getTailorByEmail($data['email'])) {
+                    $data['email_err'] = 'This email address in invalid';
+                }
             }
+
             // Validate Password
             if (empty($data['password'])) {
                 $data['password_err'] = 'Please enter password';
             }
 
-            // Check if entries are unique
-            if (!empty($data['username'])) {
-                if ($tailors = $this->tailorModel->getTailorByUser($data['username'])) {
-                    $data['username_err'] = 'Please enter a unique username';
-                }
-            }
-
-            if (!empty($data['email'])) {
-                if ($tailors = $this->tailorModel->getTailorByEmail($data['email'])) {
-                    $data['email_err'] = 'This email address in invalid';
-                }
-            }
-
-
             // Make sure errors are empty
             if (empty($data['email_err']) && empty($data['fname_err']) && empty($data['lname_err']) && empty($data['password_err']) && empty($data['username_err'])) {
 
                 // Register User
-                $registered = $this->tailorModel->register($data['email'], $data['password']);
+                $registered = $this->tailorModel->register($data);
 
                 if ($registered) {
+                    $tailor = $this->tailorModel->getTailorById($registered);
                     // Create Session
-                    $this->createSession($registered);
+                    $this->createSession($tailor);
                 } else {
                     $this->view('tailors/register', $data);
                 }
+            } else {
+                $this->view('tailors/register', $data);
             }
 
 
@@ -97,7 +97,7 @@ class Tailors extends Controller
             ];
 
             // Load view
-            $this->view('pages/signup', $data);
+            $this->view('tailors/register', $data);
         }
     }
 
@@ -164,10 +164,10 @@ class Tailors extends Controller
 
     public function createSession($tailor)
     {
-        print_r($_SESSION);
         $_SESSION['id'] = $tailor['tailor_id'];
         $_SESSION['email'] = $tailor['tailor_email'];
-        header('location: ' . URL_ROOT . 'profile/index');
+        $_SESSION['user'] = 'tailor';
+        header('location: ' . URL_ROOT . 'profiles/index/'. $tailor['tailor_id']);
     }
 
     public function signout()
@@ -177,6 +177,35 @@ class Tailors extends Controller
         session_destroy();
         header('location: ' . URL_ROOT . 'tailors/signin');
     }
+
+    public function profile($id){
+        // Get tailor
+        $tailor = $this->tailorModel->getTailorById($id);
+
+        $data = [
+            'tailor' => $tailor
+        ];
+
+        $this->view('tailors/public_profile', $data);
+    }
+
+    public function search($keyword){
+
+    }
+
+    public function city(){
+        // Get tailor
+        $city = $this->tailorModel->getTailorsLocation();
+        $data = [
+            'city' => $city
+        ];
+
+        $this->view('pages/index', $data);
+        $this->view('pages/men', $data);
+        $this->view('pages/women', $data);
+    }
+
+
 
 }
 

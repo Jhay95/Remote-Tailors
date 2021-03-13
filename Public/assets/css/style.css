@@ -16,7 +16,7 @@
     padding: 10px 0 10px 0;
     transform: translate(0,-50%);
     text-transform: uppercase;
-    font-family: verdana;
+    font-family: verdana, serif;
     font-size: 2em;
     font-weight: 500;
     color: #7f2222;
@@ -54,19 +54,49 @@ a:hover {
     background-image: url("../images/pexels-cottonbro-4620610.jpg");
 }
 
-#register {
-    background-image: url("../images/pexels-andrea-piacquadio-3852974.jpg");
+.left-col {
+    background-size: cover;
+    background: url("../images/pexels-andrea-piacquadio-3852974.jpg") no-repeat center;
+    height: 100Vh;
 }
 
+.row-full > [class ="left-col"] {
+    padding-right: 0;
+    padding-left: 0;
+}
 #about {
     background-image: url("../images/pexels-gustavo-fring-4173273.jpg");
 }
 
+#register {
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+    background: url('../images/pexels-andrea-piacquadio-3811855.jpg') no-repeat center center;
+}
+
 #login {
-    background-image: url("../images/pexels-anete-lusina-4792070.jpg");
+    background-size: cover;
+    height: 81vh;
+    overflow: hidden;
+    background: url('../images/pexels-anete-lusina-4792070 (1).jpg') no-repeat center center;
+}
+
+.reg-overlay {
+     height: 80%;
+     margin-top: 60px;
+     overflow: hidden;
+     background: rgba(94, 86, 86, 0.5) center center;
+ }
+
+.log-overlay {
+    height: 80%;
+    margin-top: 60px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.5) center center;
 }
 .content {
-    margin: 30px 0 30px 0;
+    margin: 20px 0 15px 0;
     padding: 10px 0 10px 0;
 
 }

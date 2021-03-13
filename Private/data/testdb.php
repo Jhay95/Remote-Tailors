@@ -9,7 +9,7 @@ if ($conn->connect_error) {
     if (isset($conn)) {
         die('Failed to connect to MySQL - ' . $conn->connect_error);
     }
-} else echo "Connected Successfully.\n";
+} else echo "Connected Successfully";
 
 
 # First Dummy Tailor Data input
@@ -20,7 +20,7 @@ VALUES (NULL,'ken', 'Wood','ken@gmail.com','Male', 'English',0869754326,'Kingswa
 
 
 if ($conn->query($sql) === TRUE) {
-    echo "Insertion into tailors table updated successfully.\n";
+    echo "Insertion into tailors table updated successfully";
 } else {
     echo "Error inserting into table: " . $conn->error;
 }
@@ -49,9 +49,9 @@ $cust_data = fopen("Customer dummy data.csv", "r");
 while (($data = fgetcsv($cust_data, 1000)) !== FALSE) {
     if ($i > 0) {
         $import_cust = "INSERT INTO `customers` (`customer_id`, `customer_fname` ,`customer_lname`, `customer_email`, `customer_gender`, `customer_phone`,
-                       `customer_address`,`customer_city`, `customer_username`, `customer_password`, `customer_reg_date`, `customer_modify_date`) 
+                       `customer_address`,`customer_city`, `customer_username`, `customer_password`, `customer_reg_date`) 
                     VALUES (NULL,'" . $data[1] . "', '" . $data[2] . "','" . $data[3] . "','" . $data[4] . "', '" . $data[5] . "',
-                    '" . $data[6] . "','" . $data[7] . "', '" . $data[8] . "', '" . $data[9] . "',CURRENT_TIMESTAMP, NULL)";
+                    '" . $data[6] . "','" . $data[7] . "', '" . $data[8] . "', '" . $data[9] . "',CURRENT_TIMESTAMP)";
         $conn->query($import_cust);
     }
     $i = 1;

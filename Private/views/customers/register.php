@@ -5,11 +5,11 @@
         <div class="col-md-5 reg-overlay">
             <div class="card bg-light">
                 <div class="card-header">
-                    <h2>Tailor | Create Account</h2>
+                    <h2>Customer | Create Account</h2>
                 </div>
             </div>
             <div class="card-body">
-                <form class="needs-validation" action="<?= URL_ROOT ?>tailors/signup"
+                <form class="needs-validation" action="<?= URL_ROOT ?>customers/signup"
                       method="post">
                     <div class="form-group">
                         <label for="fname">First Name</label>
@@ -59,3 +59,4 @@
 
 
 <?php require_once(INC_PATH . 'footer.php'); ?>
+
