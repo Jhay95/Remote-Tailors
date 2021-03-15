@@ -50,7 +50,7 @@
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <button type="button" class="btn btn-secondary"><a
-                                    href="<?= URL_ROOT ?>customer/edit/<? echo $data['customer']['customer_id'] ?>">Edit
+                                    href="<?= URL_ROOT ?>customers/edit/<?php echo $data['customer']['customer_id'] ?>">Edit
                                 Profile</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">Upload Works</button>
