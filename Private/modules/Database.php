@@ -8,9 +8,7 @@ class Database
     private $dbname = DB_NAME;
 
     public $conn;
-    private $show_error = true;
     private $stmt;
-    protected $query_closed = TRUE;
 
     public function __construct()
     {
