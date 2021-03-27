@@ -1,4 +1,8 @@
 <?php
+/**
+ * Class Pages
+ * This Controller displays the pages
+ */
 
 class Pages extends Controller
 {

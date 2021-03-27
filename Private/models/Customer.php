@@ -10,7 +10,7 @@ class Customer
     {
         $this->db = new Database;
     }
-    //find user through email
+    // Get Customer by email during registration
     public function getCustByEmail($email): bool
     {
         $this->db->query("SELECT * FROM customers WHERE customer_email = '$email'");
@@ -22,6 +22,7 @@ class Customer
         }
     }
 
+    // Get Customer by email during profile update
     public function findCustByEmail($email): bool
     {
         $this->db->query("SELECT * FROM customers WHERE customer_email = '$email'");
