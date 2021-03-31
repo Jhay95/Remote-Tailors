@@ -26,9 +26,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?php echo URL_ROOT; ?>customers/index/<?php echo $_SESSION['id']; ?>">My Dashboard</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="<?php echo URL_ROOT; ?>customers/message/<?php echo $_SESSION['id']; ?>">My Messages</a>
-                                </li>
                             <?php else : ?>
                             <li class="nav-item">
                                 <a class="nav-link" href="<?= URL_ROOT ?>pages/index">Home</a>
