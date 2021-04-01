@@ -106,7 +106,7 @@ class Tailor
     public function getTailorById($id): array
     {
         $this->db->query("SELECT * FROM tailors WHERE tailor_id = '$id'");
-        return $this->db->single_result();
+        return $this->db->single_result($id);
     }
 
     public function update($data): bool
@@ -128,4 +128,13 @@ class Tailor
             return true;
         } else die("Query failed: " . $this->db->error());
     }
+
+
+    public function file_details($data)
+        {
+        $this->db->insert('image_table', $data);
+        }
+
+    
+       
 }

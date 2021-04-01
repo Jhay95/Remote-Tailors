@@ -204,8 +204,5 @@ class Tailors extends Controller
         $this->view('pages/men', $data);
         $this->view('pages/women', $data);
     }
-
-
-
 }
 

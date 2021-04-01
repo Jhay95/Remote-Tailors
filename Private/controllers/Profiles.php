@@ -113,4 +113,29 @@ class Profiles extends Controller {
         }
     }
 
-}
+    function upload($id) {
+        if(isset($_POST['submit']))
+        {
+         $output_dir = "../Public/assets/uploads";//Path for file upload
+        $fileCount = count($_FILES["image"]['name']);
+        $RandomNum = time();
+        $ImageName = $_FILES['image']['name'];
+        $ImageType = $_FILES['image']['type']; //"image/png", image/jpeg etc.
+        $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+        $ImageExt = str_replace('.','',$ImageExt);
+        $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+        $NewImageName = $ImageName.'-'.$RandomNum.'.'.$ImageExt;
+        $ret[$NewImageName]= $output_dir.$NewImageName;
+        move_uploaded_file($_FILES["image"]["tmp_name"],$output_dir."/".$NewImageName );
+        $data = array(
+        'image' =>$NewImageName
+        );
+            $this->model->file_details($data);
+            echo "Image Uploaded Successfully";
+        }
+            $this->view('tailors/upload');
+    }
+    
+
+    
+}   
