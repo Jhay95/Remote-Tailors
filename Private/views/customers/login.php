@@ -29,6 +29,7 @@
                         <span class="invalid-feedback"><?php echo $data['password_err']; ?></span>
                     </div>
                     <input type="submit" class="btn btn-primary" name="submit">
+                    <span>new here? <a href="<?php echo URL_ROOT ;?>customers/signup"> create account</a></span>
                 </form>
             </div>
         </div>
