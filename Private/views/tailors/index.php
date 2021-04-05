@@ -52,7 +52,7 @@
             <div class="col-md-3">
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
-                        <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>profiles/edit/<?= $data['tailor']['tailor_id']?>">Edit Profile</a></button>
+                        <button type="button" class="btn btn-secondary"><a href="<?php echo URL_ROOT; ?>profiles/edit/<?php echo $data['tailor']['tailor_id'];?>">Edit Profile</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary"><a href="#">Upload Photo</a></button>
                         <br>
