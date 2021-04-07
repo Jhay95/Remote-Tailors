@@ -7,11 +7,13 @@
         <div class="justify-content-center">
             <h2>Upload Photos</h2>
             <div>
-                <form method="post" action="multi_file_upload"  enctype="multipart/form-data">
-                    <input type="file" name="image[]" multiple="multiple">
-                  <button type="submit" class="btn btn-warning" id="butsave"
-                            name="submit">Submit<span class="glyphicon glyphicon-send"></span></button></p>
-                </form>
+                <form class="row g-3 needs-validation" action="<?= URL_ROOT ?>Profiles/upload/<?=$data['id']?>"
+                      method="post">                      
+                    Select Image File to Upload:
+                   <input type="file" name="images" multiple="multiple">
+                   <button type="submit" class="btn btn-warning" id="butsave"
+                     name="submit">Submit<span class="glyphicon glyphicon-send"></span></button>
+                    </form>
             </div>
         </div>
     </div>
@@ -20,6 +22,5 @@
 <?php
 require_once(INC_PATH . 'footer.php');
 ?>
-
 
 

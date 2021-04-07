@@ -1,0 +1,114 @@
+ function upload($id) {
+         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            var_dump($_POST);
+            // Process form
+            $data = [
+                'photo_user_id' => $_SESSION['id'],
+                'photo_name' => '',
+                'photo_user_type' => 'tailor',
+            ];
+            {
+            $output_dir = "public/assets/uploads";//Path for file upload
+          
+            $this->model->upload($data);
+            echo "Image Uploaded Successfully";
+            }
+            $this->view('../tailors/upload', $data);
+            }
+    }
+
+
+
+
+      {
+        $sql = "INSERT INTO profile_photo (photo_name ,photo_user_id, photo_user_type) 
+                  VALUES ('" . $data['photo_name'] . "', '" . $data['photo_user_id'] . "','" . $data['photo_user_type'] . "')";
+
+        if ($this->db->query($sql, $data)) {
+            return true;
+        } else return false;
+
+
+
+        $sql = "INSERT INTO profile_photo (photo_name ,photo_user_id, photo_user_type) 
+                  VALUES ('" . $data['photo_name'] . "', '" . $data['photo_user_id'] . "','" . $data['photo_user_type'] . "')";
+
+        if ($this->db->query($sql)) {
+            return true;
+        } else return false;
+
+
+
+
+controller
+function upload(){
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['upload'])) {
+		// Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            var_dump($_POST);
+            // Process form
+            $data = [
+                'photo_user_id' => $_SESSION['id'],
+                'photo_name' => '',
+                'photo_user_type' => 'tailor',
+            ];
+
+            $output_dir = "Public/assets/uploads" . $profile_photo;//Path for file upload
+		} else {
+			foreach ($_FILES as $key => $value) {
+				if (0 < $value['error']) {
+					echo 'Error during file upload ' . $value['error'];
+				} else if (!empty($value['name'])) 
+						
+				
+				
+			             $this->view('tailors/upload');
+		}
+	}
+
+
+
+
+
+    
+        if(isset($this->request->files['profile_photo'])){
+            $image = $this->request->files['profile_photo'];
+            $errors = array();
+
+            // File info
+            $file_name = $image['photo_name'];
+            $file_size = $image['size'];
+            $file_tmp = $image['tmp_name'];
+            $file_type = $image['photo_user_type'];
+
+            // Get file extension
+            $file_ext = explode('.', $file_name);
+            $file_ext = strtolower(end($file_ext));
+            
+            // White list extensions
+            $extensions = array("jpeg","jpg","png");
+            
+            // Check it's valid file for upload
+            if(in_array($file_ext, $extensions) === false) {
+               $errors[] = "Extension not allowed, please choose a JPEG or PNG file.";
+            }
+            
+            // Check file size
+            if($file_size > 2097152) {
+               $errors[] = 'File size must be exactly 2 MB';
+            }
+            
+            if(empty($errors) == true) {
+               move_uploaded_file($file_tmp, UPLOAD . "Public/uploads/" . $file_name);
+               
+               echo "Success";
+            } else {
+               print_r($errors);
+            }
+
+             $this->view('tailors/upload', $data);
+        }
+    }
