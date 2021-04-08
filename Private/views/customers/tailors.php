@@ -5,7 +5,7 @@
 <section class="content">
     <div class="container">
         <div class="row g-3 align-items-center">
-            <div class="col-md-7 mx-auto"> <!-- -->
+            <div class="col-md-7 mx-auto bg-light">
                 <div id="user">
                     <img src="http://via.placeholder.com/180x180" alt="profile photo">
                     <h5><?php echo $data['self']['customer_fname'] . " " . $data['self']['customer_lname'] ;?></h5>

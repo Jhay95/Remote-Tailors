@@ -2,13 +2,17 @@
 <?php require_once(INC_PATH . 'head.php'); ?>
 <?php require_once(INC_PATH . "navigation.php"); ?>
 
-<section class="content h-100">
-    <div class="container h-100">
-        <span><a href="<?php echo URL_ROOT; ?>tailors/customers/<?php echo $_SESSION['id']; ?>">Back to contacts</a></span>
-        <br>
-        <div class="row g-3 h-100">
-            <div class="col-md-5 justify-content-center align-items-center bg-light">
-                <div id="tailor_id" style="background-color: #2b7f22">
+<section class="content">
+    <div class="container">
+        <div class="row g-3 align-items-center">
+            <div class="col-md-7 mx-auto">
+                <span>
+                    <a href="<?php echo URL_ROOT; ?>tailors/customers/<?php echo $_SESSION['id']; ?>">Back to contacts</a>
+                </span>
+            </div>
+            <div class="col-md-7 mx-auto bg-light">
+
+                <div class="user">
                     <img src="http://via.placeholder.com/50x50" alt="">
                     <span><?php echo $data['customer']['customer_fname'] . " " . $data['customer']['customer_lname']; ?></span>
                 </div>

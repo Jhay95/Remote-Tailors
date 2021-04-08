@@ -117,7 +117,7 @@ form {
     background-color: #f1e9e7;
 }
 
-#user, #tailors {
+#user, #tailors, #customers{
     padding: 15px;
 }
 
@@ -125,7 +125,7 @@ form {
     border-radius: 50%;
 }
 
-#tailors {
+#tailors, #customers {
     margin-top: 15px;
     padding-top: 5px;
 }

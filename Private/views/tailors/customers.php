@@ -4,14 +4,14 @@
 
 <section class="content">
     <div class="container">
-        <div class="row g-3">
-            <div class="col-md-5" style="background-color: #7f2222">
-                <div id="user" class="justify-content-center" style="background-color: #2b7f22">
-                    <img src="http://via.placeholder.com/180x180" alt="Card image">
-                    <h4>Lorem Ipsum</h4>
+        <div class="row g-3 align-items-center">
+            <div class="col-md-7 mx-auto bg-light">
+                <div id="user">
+                    <img src="http://via.placeholder.com/180x180" alt="profile photo">
+                    <h5><?php echo $data['self']['tailor_fname'] . " " . $data['self']['tailor_lname'] ;?></h5>
                 </div>
 
-                <div id="tailors" style="background-color: #228f8b">
+                <div id="customers">
                     <h3>My Customers</h3>
                     <hr>
                     <?php if (empty($data['customers'])) : ?>
@@ -21,11 +21,11 @@
                             <?php foreach ($data['customers'] as $customer) : ?>
                                 <div>
 
-                                    <h5><?php echo $customer['customer_fname'] . " " . $customer['customer_lname'] ?> <span>
-                                    <button type="button" class="btn btn-secondary">
-                                        <a href="<?php echo URL_ROOT; ?>tailors/message/<?php echo $customer['message_customer_id']; ?>">Message!</a>
-                                    </button>
-                                </span></h5>
+                                    <h5>
+                                        <a href="<?php echo URL_ROOT; ?>tailors/message/<?php echo $customer['message_customer_id']; ?>">
+                                            <?php echo $customer['customer_fname'] . " " . $customer['customer_lname'] ;?>
+                                        </a>
+                                   </h5>
 
                                 </div>
                             <?php endforeach; ?>
