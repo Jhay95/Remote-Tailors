@@ -266,12 +266,16 @@ class Tailors extends Controller
 
     public function customers($id)
     {
-        // Get tailors
+        // Get tailor
+        $self = $this->tailorModel->getTailorById($id);
+
+        // Get Customers
         $customers = $this->messageModel->getCustomersContacted($id);
 
         // Init data
         $data = [
-            'customers' => $customers
+            'customers' => $customers,
+            'self' => $self
         ];
 
         // Load view
