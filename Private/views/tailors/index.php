@@ -95,7 +95,7 @@
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <br>
-                        <button type="button" class="btn btn-secondary">My Customers</button>
+                        <button type="button" class="btn btn-secondary"><a href="<?php echo URL_ROOT ;?>tailors/customers/<?php echo $data['tailor']['tailor_id']; ?>">My Customers</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">My Orders</button>
                     </div>
