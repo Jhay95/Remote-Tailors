@@ -4,6 +4,8 @@
 
 <section class="content h-100">
     <div class="container h-100">
+        <span><a href="<?php echo URL_ROOT; ?>customers/tailors/<?php echo $_SESSION['id']; ?>">Back to contacts</a></span>
+        <br>
         <div class="row g-3 h-100">
             <div class="col-md-5 justify-content-center align-items-center bg-light">
                 <div id="tailor_id" style="background-color: #2b7f22">
@@ -17,7 +19,7 @@
                         <?php foreach ($data['messages'] as $message) : ?>
                             <div>
                                 <span><?php echo $message['message_sent_date']; ?></span>
-                                <span><?php echo ($message['message_sent_date'] == 'Customer') ? 'by '.$data['tailor']['tailor_fname'] . " " . $data['tailor']['tailor_lname'] : ''; ?></span>
+                                <span><?php echo ($message['message_sent_by'] == 'Customer') ? 'by me' : 'by '.$data['tailor']['tailor_fname'] . " " . $data['tailor']['tailor_lname']; ?></span>
                                 <p><?php echo $message['message_body']; ?></p>
                             </div>
                         <?php endforeach; ?>
@@ -36,6 +38,7 @@
 
                     <div class="form-group">
                         <input type="submit" name="send">
+
                     </div>
 
                 </form>
