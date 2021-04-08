@@ -323,7 +323,7 @@ class Customers extends Controller
 
                 if ($sent) {
                     // redirect to my_tailor controller
-                    header('location:' . URL_ROOT . 'customers/tailors/' . $_SESSION['id']);
+                    header('location:' . URL_ROOT . 'customers/message/' . $id);
                 }
             } else {
                 // Load view
