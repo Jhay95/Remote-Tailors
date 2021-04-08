@@ -21,8 +21,19 @@ class Message
         } else return false;
     }
 
+    public function getCustomersContacted($id){
+        $sql = "SELECT distinct cm.message_customer_id, c.customer_fname, c.customer_lname
+                                FROM contact_messages cm
+                                JOIN customers c on cm.message_customer_id = c.customer_id
+                                WHERE cm.message_tailor_id = '$id'";
+        //check row
+        if ($this->db->query($sql))  {
+            return $this->db->result_set();
+        } else return false;
+    }
+
     public function getMessagesbyCustomers($c_id, $t_id){
-        $sql = $this->db->query("SELECT message_body, message_sent_date, message_sent_by
+        $this->db->query("SELECT message_body, message_sent_date, message_sent_by
                                 FROM contact_messages
                                 WHERE message_customer_id = '$c_id' and message_tailor_id = '$t_id'");
         //check row
@@ -31,8 +42,14 @@ class Message
         } else return false;
     }
 
-    public function getMessagesbyTailors($id){
-
+    public function getMessagesbyTailors($t_id, $c_id){
+        $this->db->query("SELECT message_body, message_sent_date, message_sent_by
+                                FROM contact_messages
+                                WHERE message_tailor_id = '$t_id' and message_customer_id = '$c_id'");
+        //check row
+        if ($this->db->rows_count() > 0) {
+            return $this->db->result_set();
+        } else return false;
     }
 
     public function sendMessageFromCust($data){
@@ -43,7 +60,10 @@ class Message
 
     }
 
-    public function sendMessageFromTail(){
-
+    public function sendMessageFromTail($data){
+        $sql = "INSERT INTO contact_messages (message_customer_id, message_tailor_id, message_body, message_sent_by) VALUES ('" . $data['customer_id'] . "', '" . $data['tailor_id'] . "','" . $data['message'] . "', 'Tailor')";
+        if ($this->db->query($sql)) {
+            return true;
+        } else return false;
     }
 }
