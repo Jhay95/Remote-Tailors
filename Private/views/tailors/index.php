@@ -52,7 +52,7 @@
             <div class="col-md-3">
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
-                        <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>profiles/edit/<?= $data['tailor']['tailor_id']?>">Edit Profile</a></button>
+                        <button type="button" class="btn btn-secondary"><a href="<?php echo URL_ROOT; ?>profiles/edit/<?php echo $data['tailor']['tailor_id'];?>">Edit Profile</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>profiles/upload/<?= $data['tailor']['tailor_id']?>">Upload Photo</a></button>
                         <br>
@@ -95,7 +95,7 @@
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <br>
-                        <button type="button" class="btn btn-secondary">My Customers</button>
+                        <button type="button" class="btn btn-secondary"><a href="<?php echo URL_ROOT ;?>tailors/customers/<?php echo $data['tailor']['tailor_id']; ?>">My Customers</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">My Orders</button>
                     </div>
