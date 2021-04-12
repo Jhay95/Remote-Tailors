@@ -5,10 +5,14 @@ class Tailors extends Controller
 {
 
     private $tailorModel;
+    private $customerModel;
+    private $messageModel;
 
     public function __construct()
     {
         $this->tailorModel = $this->model('Tailor');
+        $this->customerModel = $this->model('Customer');
+        $this->messageModel = $this->model('Message');
 
     }
 
@@ -193,16 +197,89 @@ class Tailors extends Controller
 
     }
 
-    public function city(){
+    public function message($id)
+    {
+        if (!loggedin()) {
+            header('location: ' . URL_ROOT . 'tailors/login');
+        }
+
+        // Check for POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $customer = $this->customerModel->getCustomerById($id);
+
+            // Check if customer has previous conversation with tailor
+            $messages = $this->messageModel->getMessagesbyTailors($_SESSION['id'], $id);
+
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // Process form
+            $data = [
+                'tailor_id' => $_SESSION['id'],
+                'customer_id' => $id,
+                'customer' => $customer,
+                'messages' => $messages,
+                'message' => $_POST['message'],
+                'message_err' => ''
+            ];
+
+
+
+            // Validate Password
+            if (empty($data['message'])) {
+                $data['message_err'] = 'Please type a message';
+            }
+
+            // Make sure errors are empty
+            if (empty($data['message_err'])) {
+
+                // Register User
+                $sent = $this->messageModel->sendMessageFromTail($data);
+
+                if ($sent) {
+                    // redirect to my_tailor controller
+                    header('location:' . URL_ROOT . 'tailors/message/' . $id);
+                }
+            } else {
+                // Load view
+                $this->view('tailors/contact', $data);
+            }
+
+        } else {
+            //Get tailor
+            $customer = $this->customerModel->getCustomerById($id);
+
+            // Check if customer has previous conversation with tailor
+            $messages = $this->messageModel->getMessagesbyTailors($_SESSION['id'], $id);
+
+            // Init data
+            $data = [
+                'tailor_id' => $_SESSION['id'],
+                'customer' => $customer,
+                'messages' => $messages
+            ];
+
+            $this->view('tailors/contact', $data);
+        }
+    }
+
+    public function customers($id)
+    {
         // Get tailor
-        $city = $this->tailorModel->getTailorsLocation();
+        $self = $this->tailorModel->getTailorById($id);
+
+        // Get Customers
+        $customers = $this->messageModel->getCustomersContacted($id);
+
+        // Init data
         $data = [
-            'city' => $city
+            'customers' => $customers,
+            'self' => $self
         ];
 
-        $this->view('pages/index', $data);
-        $this->view('pages/men', $data);
-        $this->view('pages/women', $data);
+        // Load view
+        $this->view('tailors/customers', $data);
     }
 }
 

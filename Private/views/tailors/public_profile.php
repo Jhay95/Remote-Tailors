@@ -45,8 +45,7 @@
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <br>
-                        <button type="button" class="btn btn-secondary"><a href="#">Contact</a></button>
-                        <br>
+                        <button type="button" class="btn btn-secondary"><a href="<?php echo URL_ROOT ;?>customers/message/<?php echo $data['tailor']['tailor_id'] ; ?>">Contact</a></button>
                     </div>
                 </div>
             </div>

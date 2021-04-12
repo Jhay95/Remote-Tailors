@@ -50,7 +50,7 @@
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <button type="button" class="btn btn-secondary"><a
-                                    href="<?= URL_ROOT ?>customers/edit/<?php echo $data['customer']['customer_id'] ?>">Edit
+                                    href="<?php echo URL_ROOT ;?>customers/edit/<?php echo $data['customer']['customer_id']; ?>">Edit
                                 Profile</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">Upload Works</button>
@@ -92,12 +92,12 @@
                 <div class="well well-sm text-center">
                     <div class="btn-group-vertical">
                         <br>
-                        <button type="button" class="btn btn-secondary"><a href="<?= URL_ROOT ?>pages/index">Find a
+                        <button type="button" class="btn btn-secondary"><a href="<?php echo URL_ROOT;?>pages/index">Find a
                                 Tailor</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">My Orders</button>
                         <br>
-                        <button type="button" class="btn btn-secondary">My Tailors</button>
+                        <button type="button" class="btn btn-secondary"><a href="<?php echo URL_ROOT ;?>customers/tailors/<?php echo $data['customer']['customer_id']; ?>">My Tailors</a></button>
                     </div>
                 </div>
             </div>

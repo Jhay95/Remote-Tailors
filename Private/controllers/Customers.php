@@ -5,15 +5,20 @@ class Customers extends Controller
 {
 
     private $custModel;
+    private $tailorModel;
+    private $messageModel;
 
     public function __construct()
     {
         $this->custModel = $this->model('Customer');
+        $this->tailorModel = $this->model('Tailor');
+        $this->messageModel = $this->model('Message');
 
     }
 
-    public function index($id) {
-        if(loggedin() && $_SESSION['user'] == 'customer'){
+    public function index($id)
+    {
+        if (loggedin() && $_SESSION['user'] == 'customer') {
             $customer = $this->custModel->getCustomerById($id);
             $data = [
                 'customer' => $customer
@@ -23,6 +28,7 @@ class Customers extends Controller
         } else header('location: ' . URL_ROOT . 'customers/signin');
 
     }
+
     public function signup()
     {
         // Check for POST
@@ -188,7 +194,8 @@ class Customers extends Controller
         header('location: ' . URL_ROOT . 'customers/signin');
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
 
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -237,7 +244,7 @@ class Customers extends Controller
 
                 if ($updated) {
                     // Create Session
-                    header('location: ' . URL_ROOT . 'customers/index/'. $id);
+                    header('location: ' . URL_ROOT . 'customers/index/' . $id);
                 } else {
                     die('Something happened!!, Unable to update profile');
                 }
@@ -273,4 +280,90 @@ class Customers extends Controller
             $this->view('customers/edit', $data);
         }
     }
+
+    public function message($id)
+    {
+        if (!loggedin()) {
+            header('location: ' . URL_ROOT . 'customers/login');
+        }
+
+        // Check for POST
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $tailor = $this->tailorModel->getTailorById($id);
+
+            // Check if customer has previous conversation with tailor
+            $messages = $this->messageModel->getMessagesbyCustomers($_SESSION['id'], $id);
+
+            // Sanitize POST data
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            // Process form
+            $data = [
+                'customer_id' => $_SESSION['id'],
+                'tailor_id' => $id,
+                'tailor' => $tailor,
+                'messages' => $messages,
+                'message' => $_POST['message'],
+                'message_err' => ''
+            ];
+
+
+
+            // Validate Password
+            if (empty($data['message'])) {
+                $data['message_err'] = 'Please type a message';
+            }
+
+            // Make sure errors are empty
+            if (empty($data['message_err'])) {
+
+                // Register User
+                $sent = $this->messageModel->sendMessageFromCust($data);
+
+                if ($sent) {
+                    // redirect to my_tailor controller
+                    header('location:' . URL_ROOT . 'customers/message/' . $id);
+                }
+            } else {
+                // Load view
+                $this->view('customers/contact', $data);
+            }
+
+        } else {
+            //Get tailor
+            $tailor = $this->tailorModel->getTailorById($id);
+
+            // Check if customer has previous conversation with tailor
+            $messages = $this->messageModel->getMessagesbyCustomers($_SESSION['id'], $id);
+
+            // Init data
+            $data = [
+                'customer_id' => $_SESSION['id'],
+                'tailor' => $tailor,
+                'messages' => $messages
+            ];
+
+            $this->view('customers/contact', $data);
+        }
+    }
+
+    public function tailors($id)
+    {
+        // get customer
+        $self = $this->custModel->getCustomerById($id);
+
+        // Get tailors
+        $tailors = $this->messageModel->getTailorsContacted($id);
+
+        // Init data
+        $data = [
+            'tailors' => $tailors,
+            'self' => $self
+        ];
+
+        // Load view
+        $this->view('customers/tailors', $data);
+    }
+
 }

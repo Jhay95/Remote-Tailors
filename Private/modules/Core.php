@@ -14,16 +14,16 @@ class Core
 
     public function __construct()
     {
-        /*print_r($this->geturl());*/
 
         $url = $this->geturl();
-
-        //Look for controllers
-        if (file_exists('../Private/controllers/'. ucwords($url[0]) . '.php')) {
-            // If Controller exists
-            $this->currentController = ucwords($url[0]);
-            //unset 0  index
-            unset($url[0]);
+        if (!empty($url)) {
+            //Look for controllers
+            if (file_exists('../Private/controllers/' . ucwords($url[0]) . '.php')) {
+                // If Controller exists
+                $this->currentController = ucwords($url[0]);
+                //unset 0  index
+                unset($url[0]);
+            }
         }
 
         //require the controller

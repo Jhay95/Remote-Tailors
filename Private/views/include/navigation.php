@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <!-- Logo Section -->
-        <a class="navbar-brand" href="<?= URL_ROOT ?>pages/index.php"><span class="text">Remote Tailor</span></a>
+        <a class="navbar-brand" href="<?php echo URL_ROOT ;?>pages/index.php"><span class="text">Remote Tailor</span></a>
 
         <!-- Navigation Section -->
         <div class="row">
@@ -28,12 +28,12 @@
                                 </li>
                             <?php else : ?>
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= URL_ROOT ?>pages/index">Home</a>
+                                <a class="nav-link" href="<?php echo URL_ROOT; ?>pages/index">Home</a>
                             </li>
                             <?php endif;?>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="<?= URL_ROOT ?>pages/about">About Us</a>
+                                <a class="nav-link" href="<?php echo URL_ROOT ;?>pages/about">About Us</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
@@ -41,8 +41,8 @@
                                     Looking for
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="<?= URL_ROOT ?>pages/men">Tailors for Men</a>
-                                    <a class="dropdown-item" href="<?= URL_ROOT ?>pages/women">Tailors for Women</a>
+                                    <a class="dropdown-item" href="<?php echo URL_ROOT ;?>pages/men">Tailors for Men</a>
+                                    <a class="dropdown-item" href="<?php echo URL_ROOT ;?>pages/women">Tailors for Women</a>
                                 </div>
                             </li>
                         </ul>
@@ -70,8 +70,8 @@
                                     Register
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="<?= URL_ROOT ?>tailors/signup">I am a Tailor</a>
-                                    <a class="dropdown-item" href="<?= URL_ROOT ?>customers/signup">Looking for
+                                    <a class="dropdown-item" href="<?php echo URL_ROOT; ?>tailors/signup">I am a Tailor</a>
+                                    <a class="dropdown-item" href="<?php echo URL_ROOT; ?>customers/signup">Looking for
                                         Tailor</a>
                                 </div>
                             </li>
@@ -82,8 +82,8 @@
                                     Sign in
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="<?= URL_ROOT ?>tailors/signin">I am a Tailor</a>
-                                    <a class="dropdown-item" href="<?= URL_ROOT ?>customers/signin">Looking for
+                                    <a class="dropdown-item" href="<?php echo URL_ROOT; ?>tailors/signin">I am a Tailor</a>
+                                    <a class="dropdown-item" href="<?php echo URL_ROOT; ?>customers/signin">Looking for
                                         Tailor</a>
                                 </div>
                             </li>

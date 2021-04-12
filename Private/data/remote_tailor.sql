@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 27, 2021 at 10:49 PM
+-- Generation Time: Apr 08, 2021 at 01:24 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -20,6 +20,32 @@ SET time_zone = "+00:00";
 --
 -- Database: `remote_tailor`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact_messages`
+--
+
+CREATE TABLE `contact_messages` (
+  `message_id` int UNSIGNED NOT NULL,
+  `message_customer_id` int UNSIGNED NOT NULL,
+  `message_tailor_id` int UNSIGNED NOT NULL,
+  `message_body` varchar(255) NOT NULL,
+  `message_sent_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `message_sent_by` set('Customer','Tailor') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `contact_messages`
+--
+
+INSERT INTO `contact_messages` (`message_id`, `message_customer_id`, `message_tailor_id`, `message_body`, `message_sent_date`, `message_sent_by`) VALUES
+(10, 1, 21, 'Hello Paras, \r\n\r\nDo you think you can make a maxi skirt before wednesday?', '2021-04-05 02:08:51', 'Customer'),
+(11, 1, 21, 'Hello Paras, \r\n\r\nDo you think you can make a maxi skirt before wednesday?', '2021-04-05 02:11:04', 'Customer'),
+(12, 1, 21, 'Can you give me a description of what you want?', '2021-04-08 00:49:13', 'Tailor'),
+(13, 1, 21, 'Can you give me a description of what you want?', '2021-04-08 00:50:33', 'Tailor'),
+(14, 1, 21, 'Hey, still waiting for your response', '2021-04-08 00:51:24', 'Tailor');
 
 -- --------------------------------------------------------
 
@@ -180,17 +206,23 @@ INSERT INTO `tailors` (`tailor_id`, `tailor_fname`, `tailor_lname`, `tailor_emai
 (23, 'Jatin', 'Saoirse', 'Saoirse@gmail.com', 'Female', 'Native', '2233445565', 'Aberdeen', 'Aberdeen', 'Female', 'Saoirse28', 'Saoirse28', '2021-03-12 02:21:15', NULL),
 (24, 'Judith', 'Sariah', 'Sariah@gmail.com', 'Male', 'Native', '2256778899', 'Belfast', 'Belfast', 'Male,Female', 'Sariah32', 'Sariah32', '2021-03-12 02:21:15', NULL),
 (25, 'Sunny', 'Savannah', 'Savannah@gmail.com', 'Male', 'Native', '2223455465', 'Canterbury', 'Canterbury', 'Male', 'Savannah36', 'Savannah36', '2021-03-12 02:21:15', NULL),
-(26, 'Juliette', 'Scarlet', 'Scarlet@gmail.com', 'Male', 'Native', '2276889977', 'Armagh', 'Armagh', 'Male', 'Scarlet39', 'Scarlet39', '2021-03-12 02:21:15', NULL),
-(27, 'Sobechukwu', 'Anwunah', 'missjay2805@gmail.com', 'Male', 'English', '08134817006', '33b Ebinpejo Street Obanikoro Lagos', 'Lagos', 'Male', 'jaysteph', 'William45', '2021-03-12 02:23:33', '2021-03-12 02:24:04'),
-(28, 'Judith', 'Anwunah', 'missjay@gmail.com', 'Male', 'English', '07984567543', '22b Kings crescent Belwood', 'Aberdeen', 'Male', 'jaygold', 'kennykyu6479', '2021-03-14 17:25:11', '2021-03-14 17:26:22'),
-(29, 'Stella', 'Kings', 'stella@hotmail.com', 'Male', 'Native', '0793528293645', '34, Abotswell Drive', 'Porthlethen', 'Male', 'stell', 'kennykyu6479', '2021-03-15 13:45:22', '2021-03-15 13:45:57'),
+(26, 'Juliette', 'Scarlet', 'Scarlet@gmail.com', 'Male', 'Native', '22768899774', 'Armagh', 'Armagh', 'Male', 'Scarlet39', 'Scarlet39', '2021-03-12 02:21:15', NULL),
+(29, 'Stella', 'Kings', 'stella@hotmail.com', 'Male', 'Native', '07935282936', '34, Abotswell Drive', 'Porthlethen', 'Male', 'stell', 'kennykyu6479', '2021-03-15 13:45:22', '2021-03-15 13:45:57'),
 (30, 'Kelvin', 'Phil', 'kelly@gmail.com', 'Female', 'Native', '', '134 Apartment, Caister Hall', 'Edin', 'Female', 'kelly', 'kennykyu6479', '2021-03-15 14:02:10', '2021-03-15 14:02:59'),
 (31, 'Stella', 'George', 'george@gmail.com', 'Male', 'English', '', '14 kingsways', 'Aberdeen', 'Male', 'george', 'kennykyu6479', '2021-03-15 14:33:37', '2021-03-15 14:34:17'),
-(32, 'Kelly', 'Jones', 'kely@gmail.com', 'Female', 'Native', '079855945625', '123, kingsway', 'Porthlethen', 'Male', 'kellz', 'kennykyu6479', '2021-03-16 12:31:21', '2021-03-16 12:32:18');
+(32, 'Kelly', 'Jones', 'kely@gmail.com', 'Female', 'Native', '07985945625', '123, kingsway', 'Porthlethen', 'Male', 'kellz', 'kennykyu6479', '2021-03-16 12:31:21', '2021-03-16 12:32:18');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  ADD PRIMARY KEY (`message_id`),
+  ADD KEY `fk_cust_id` (`message_customer_id`),
+  ADD KEY `fk_tail_id` (`message_tailor_id`);
 
 --
 -- Indexes for table `customers`
@@ -227,6 +259,12 @@ ALTER TABLE `tailors`
 --
 
 --
+-- AUTO_INCREMENT for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  MODIFY `message_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
@@ -253,6 +291,13 @@ ALTER TABLE `tailors`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `contact_messages`
+--
+ALTER TABLE `contact_messages`
+  ADD CONSTRAINT `fk_cust_id` FOREIGN KEY (`message_customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_tail_id` FOREIGN KEY (`message_tailor_id`) REFERENCES `tailors` (`tailor_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `proof_of_work`
