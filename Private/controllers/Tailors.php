@@ -281,5 +281,9 @@ class Tailors extends Controller
         // Load view
         $this->view('tailors/customers', $data);
     }
+
+    
+
+
 }
 

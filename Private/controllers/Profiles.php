@@ -2,6 +2,7 @@
 class Profiles extends Controller {
 
     private $tailorModel;
+    
 
     public function __construct(){
        if(!loggedin()){
@@ -113,62 +114,59 @@ class Profiles extends Controller {
         }
     }
 
-    public function upload($id){
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitize POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            var_dump($_POST);
+    function upload()
+      {
+      if (isset($_POST['submit'])) {
             // Process form
-            $data = [
-                    'id' => $_SESSION['id'],
-                    'photo_name' => '',
-                     'photo_user_type' => '',
-                     'photo_user-id' => '',
-                 ];
-            
-     
-            
-            $image = $this->request->files['profile_photo'];
-            $errors = array();
+         
+        $data = [
+                'photo_user_id' => $_SESSION['id'],
+                'photo_name' => '',
+                'photo_user_type' => '',
+            ];
+             
+          $file =$_FILES['file'];
+          $fileName = $_FILES['file'] ['name'];
+          $fileTmpName = $_FILES['file'] ['tmp_name'];
+          $fileSize = $_FILES['file'] ['size'];
+          $fileError = $_FILES['file'] ['error'];
+          $fileType = $_FILES['file'] ['type'];
+         
+          $fileExt = explode('.', $fileName);
+          $fileActualExt = strtolower(end($fileExt));
 
-            // File info
-            $file_name = $image['photo_name'];
-            $file_size = $image['size'];
-            $file_tmp = $image['tmp_name'];
-            $file_type = $image['photo_user_type'];
+         $allowed = array('jpg', 'jpeg', 'png','pdf');
 
-            // Get file extension
-            $file_ext = explode('.', $file_name);
-            $file_ext = strtolower(end($file_ext));
-            
-            // White list extensions
-            $extensions = array("jpeg","jpg","png");
-            
-            // Check it's valid file for upload
-            if(in_array($file_ext, $extensions) === false) {
-               $errors[] = "Extension not allowed, please choose a JPEG or PNG file.";
+        if (in_array($fileActualExt, $allowed)) {
+            if($fileError === 0){
+                if($fileSize < 5000000){
+                    $fileNAmeNew = uniqid('', true).".".$fileActualExt;
+                    $fileDestination = '../Public/assets/uploads/'.$fileNAmeNew;
+                    move_uploaded_file($fileTmpName, $fileDestination);
+                                      
+                }else{ 
+                    echo "Your file is too large!";
+                }
+            }else {
+                echo "There was an error uploading your file!";
             }
-            
-            // Check file size
-            if($file_size > 2097152) {
-               $errors[] = 'File size must be exactly 2 MB';
-            }
-            
-            if(empty($errors) == true) {
-               move_uploaded_file($file_tmp, UPLOAD . "Public/uploads/" . $file_name);
-                      $tailors = $this->tailorModel->upload($data);
-               echo "Success";
-            } else {
-                
-               print_r($errors);
-            }
-
-             $this->view->render('tailors/upload', $data);
+          }else {
+              echo "You cannot upload files of this type!";
         }
+          $tailor = $this->tailorModel->upload($data);
+            
+        }
+            
+        {
+            
+            $this->view('tailors/upload');
+           
+        }
+         
     }
-   
-	
-}   
+    
+}
+
 
 
 

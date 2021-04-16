@@ -130,21 +130,17 @@ class Tailor
     }
 
 
-    public function upload($data) {     
+    public function upload($data): bool
+     {     
      // Get images from the database
-    {
+    
        $sql = "INSERT INTO profile_photo (photo_name ,photo_user_id, photo_user_type) 
                   VALUES ('" . $data['photo_name'] . "', '" . $data['photo_user_id'] . "','" . $data['photo_user_type'] . "')";
 
-        if ($this->db->insert($sql)) {
+        if ($this->db->query($sql)) {
             return true;
-        } else die("Query failed: " . $this->db->error());
-        $this->model->upload($data);
-      }
+        } else return false;
     }
-    
-
-
 
 }
 
