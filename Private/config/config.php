@@ -11,7 +11,7 @@ define("DB_NAME", "remote_tailor");
 // __FILE__ returns the current path to this file
 // dirname() returns the path to the parent directory
 // URL root
-define("URL_ROOT", "http://localhost:8080/CMM004 Coursework/Remote-Tailors/");
+define("URL_ROOT", "http://localhost/CMM004/Remote-Tailors/");
 define("SITE_NAME", "RemoteTailor");
 define("PRIVATE_PATH", dirname(dirname(__FILE__)));
 define("PROJECT_PATH", dirname(PRIVATE_PATH));

@@ -106,7 +106,7 @@ class Tailor
     public function getTailorById($id): array
     {
         $this->db->query("SELECT * FROM tailors WHERE tailor_id = '$id'");
-        return $this->db->single_result();
+        return $this->db->single_result($id);
     }
 
     public function update($data): bool
@@ -128,4 +128,21 @@ class Tailor
             return true;
         } else die("Query failed: " . $this->db->error());
     }
+
+
+    public function upload($data): bool
+     {     
+     // Get images from the database
+    
+       $sql = "INSERT INTO profile_photo (photo_name ,photo_user_id, photo_user_type) 
+                  VALUES ('" . $data['photo_name'] . "', '" . $data['photo_user_id'] . "','" . $data['photo_user_type'] . "')";
+
+        if ($this->db->query($sql)) {
+            return true;
+        } else return false;
+    }
+
 }
+
+
+

@@ -56,7 +56,6 @@ class Customer
             return $this->db->last_insert_id();
         } else return false;
     }
-
     // Login User
     public function login($email, $password): array
     {
