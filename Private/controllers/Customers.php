@@ -20,8 +20,11 @@ class Customers extends Controller
     {
         if (loggedin() && $_SESSION['user'] == 'customer') {
             $customer = $this->custModel->getCustomerById($id);
+            $photo = $this->custModel->profile_photo($id);
+
             $data = [
-                'customer' => $customer
+                'customer' => $customer,
+                'photo' => $photo
             ];
 
             $this->view('customers/index', $data);
@@ -281,9 +284,76 @@ class Customers extends Controller
         }
     }
 
+    public function upload($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'photo_user_id' => $id,
+                'photo_name' => '',
+                'photo_user_type' => 'customer',
+                'file_error' => ''
+            ];
+
+            // get the file name
+            $data['photo_name'] = $_FILES['file'] ['name'];
+
+            // get the file temp name
+            $fileTmpName = $_FILES['file'] ['tmp_name'];
+
+            // get the file extension
+            $fileActualExt = pathinfo($data['photo_name'], PATHINFO_EXTENSION);
+
+            // destination of the file on the server
+            $fileDestination = '../Public/assets/profile_uploads/' . $data['photo_name'];
+
+            // Check if a file was selected
+            if (empty($_FILES['file'])) {
+                $data['file_error'] = "Please select a file to upload";
+            }
+
+            // Check if file extension matches required types
+            if (!in_array($fileActualExt, ['png', 'jpeg', 'jpg', 'gif'])) {
+                $data['file_error'] = "You file extension must be .png, .jpeg or .jpg";
+            } elseif ($_FILES['file']['size'] > 5000000) { // file shouldn't be larger than 5Megabyte
+                $data['file_error'] = "File too large!";
+            }
+
+            if (empty($data['file_error'])) {
+                // move the uploaded (temporary) file to the specified destination
+                if (move_uploaded_file($fileTmpName, $fileDestination)) {
+
+                    //check if any profile pic for user exist
+                    $uploaded = $this->custModel->upload($data);
+
+                    /*   if ($exists) {
+                              $uploaded = $this->writerModel->editPhoto($data);
+                          } else {
+                              $uploaded = $this->writerModel->uploadPhoto($data);
+                          }*/
+
+                    if ($uploaded === True) {
+                        header('location:' . URL_ROOT . 'customers/index/' . $id);
+                    } else {
+                        $data['file_error'] = "Failed to upload file.";
+                    }
+                    $this->view('customers/profile_upload', $data);
+                }
+                $this->view('customers/profile_upload', $data);
+            } else {
+                $this->view('customers/profile_upload', $data);
+            }
+        } else {
+            $data = [
+                'id' => $id,
+            ];
+            $this->view('customers/profile_upload', $data);
+        }
+    }
+
     public function message($id)
     {
-        if (!loggedin()) {
+        if (!loggedin() || $_SESSION['user'] !== 'customer') {
             header('location: ' . URL_ROOT . 'customers/login');
         }
 
