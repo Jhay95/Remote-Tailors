@@ -11,7 +11,18 @@
                     <!--Profile pics--->
                     <div class="col-sm-3">
                         <div class="card-body">
-                            <img src="http://via.placeholder.com/180x180" alt="Card image">
+                            <?php if (empty($data['photo'])): ?>
+                                <?php if ($data['customer']['customer_gender'] == 'Male'): ?>
+                                    <img src="<?php echo URL_ROOT; ?>assets/profile_uploads/m dummy.png"
+                                         alt="Card image" width="160px" height="160px">
+                                <?php else: ?>
+                                    <img src="<?php echo URL_ROOT; ?>assets/profile_uploads/f dummy.png"
+                                         alt="Card image" width="160px" height="160px">
+                                <?php endif; ?>
+                            <?php else: ?>
+                                <img src="<?php echo URL_ROOT; ?>assets/profile_uploads/<?php echo $data['photo']['photo_name']; ?>"
+                                     alt="Card image" width="160px" height="160px">
+                            <?php endif; ?>
                         </div>
                     </div>
 
@@ -28,9 +39,12 @@
                                     <strong>LOCATION: </strong><em><?php echo $data['customer']['customer_city']; ?></em>
                                 </h6>
                                 <br>
+                                <h6 class="card-text">
+                                    <strong>GENDER: </strong><em><?php echo $data['customer']['customer_gender']; ?></em>
+                                </h6>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-sm-6">
                                 <br>
                                 <h6 class="card-text">
                                     <strong>EMAIL: </strong><em><?php echo $data['customer']['customer_email']; ?></em>
@@ -52,6 +66,10 @@
                         <button type="button" class="btn btn-secondary"><a
                                     href="<?php echo URL_ROOT ;?>customers/edit/<?php echo $data['customer']['customer_id']; ?>">Edit
                                 Profile</a></button>
+                        <br>
+                        <button type="button" class="btn btn-secondary"><a
+                                    href="<?php echo URL_ROOT; ?>customers/upload/<?php echo $data['customer']['customer_id']; ?>">Upload
+                                Photo</a></button>
                         <br>
                         <button type="button" class="btn btn-secondary">Upload Works</button>
                     </div>
