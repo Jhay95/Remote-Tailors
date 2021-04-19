@@ -6,9 +6,6 @@
 
 class Pages extends Controller
 {
-    /**
-     * @var mixed
-     */
     private $tailorModel;
 
     public function __construct()
@@ -19,9 +16,10 @@ class Pages extends Controller
 
     public function index(){
         $tailors = $this->tailorModel->getTailors();
+
         $data = [
             'title' => 'Remote Tailor',
-            'tailors' => $tailors
+            'tailors' => $tailors,
         ];
 
         $this->view('pages/index', $data);
