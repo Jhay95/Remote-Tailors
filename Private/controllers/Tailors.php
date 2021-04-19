@@ -185,9 +185,13 @@ class Tailors extends Controller
     public function profile($id){
         // Get tailor
         $tailor = $this->tailorModel->getTailorById($id);
+        $photo = $this->tailorModel->profile_photo($id);
+        $works = $this->tailorModel->work_photo($id);
 
         $data = [
-            'tailor' => $tailor
+            'tailor' => $tailor,
+            'photo' => $photo,
+            'works' => $works
         ];
 
         $this->view('tailors/public_profile', $data);
