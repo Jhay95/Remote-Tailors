@@ -2,7 +2,7 @@
 <?php require_once(INC_PATH . 'head.php'); ?>
 <?php require_once(INC_PATH . "navigation.php"); ?>
 
-<section class="content">
+<section class="content" id="message">
     <div class="container">
         <div class="row g-3 align-items-center">
             <div class="col-md-7 mx-auto">
@@ -13,7 +13,6 @@
             <div class="col-md-7 mx-auto bg-light">
 
                 <div class="user">
-                    <img src="http://via.placeholder.com/50x50" alt="">
                     <span><?php echo $data['customer']['customer_fname'] . " " . $data['customer']['customer_lname']; ?></span>
                 </div>
 
@@ -29,6 +28,7 @@
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
+
                 <!-------Form for new message------->
                 <form action="<?php echo URL_ROOT; ?>tailors/message/<?php echo $data['customer']['customer_id']; ?>"
                       method="post">

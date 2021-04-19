@@ -2,7 +2,7 @@
 <?php require_once(INC_PATH . 'head.php'); ?>
 <?php require_once(INC_PATH . "navigation.php"); ?>
 
-<section class="content">
+<section class="content" id="message">
     <div class="container">
         <div class="row g-3 align-items-center">
             <div class="col-md-7 mx-auto">
@@ -22,7 +22,7 @@
                             <div>
                                 <span><?php echo $message['message_sent_date']; ?></span>
                                 <span><?php echo ($message['message_sent_by'] == 'Customer') ? 'by me' : 'by '.$data['tailor']['tailor_fname'] . " " . $data['tailor']['tailor_lname']; ?></span>
-                                <p><?php echo $message['message_body']; ?></p>
+                                <p style="white-space: pre-wrap;"><?php echo $message['message_body']; ?></p>
                             </div>
                         <?php endforeach; ?>
                     </div>
