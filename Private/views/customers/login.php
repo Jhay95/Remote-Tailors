@@ -11,8 +11,7 @@
             </div>
 
             <div class="card-body">
-                <form class="container" action="<?= URL_ROOT ?>customers/signin" method="post">
-
+                <form class="container" action="<?php echo URL_ROOT ;?>customers/signin" method="post">
                     <div class="form-group">
                         <label for="email">Email address</label>
                         <input type="email"
