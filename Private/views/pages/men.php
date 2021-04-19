@@ -28,9 +28,16 @@ require_once(INC_PATH . 'filter.php')
             <?php foreach ($data['tailors'] as $tailor): ?>
                 <div class="col-sm-4">
                     <div class="row t-card">
-                        <div class="col-sm-5">
-                            <img src="http://via.placeholder.com/140x140" alt="">
-                        </div>
+                        <?php if (empty($tailor['photo_name'])): ?>
+                            <div class="col-sm-5">
+                                <img src="http://via.placeholder.com/140x140" alt="">
+                            </div>
+                        <?php else :?>
+                            <div class="col-sm-5">
+                                <img src="<?php echo URL_ROOT; ?>assets/work_uploads/<?php echo $tailor['photo_name']; ?>"
+                                     alt="Card image" width="140px" height="140px">
+                            </div>
+                        <?php endif;?>
 
                         <div class="col-sm-7">
                             <br>
