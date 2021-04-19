@@ -86,4 +86,22 @@ class Customer
             return true;
         } else return false;
     }
+
+    // Upload profile photo
+    public function upload($data): bool
+    {
+        // Get images from the database
+        $sql = "INSERT INTO profile_photo (photo_name ,photo_user_id, photo_user_type) 
+                  VALUES ('" . $data['photo_name'] . "', '" . $data['photo_user_id'] . "','" . $data['photo_user_type'] . "')";
+
+        if ($this->db->query($sql)) {
+            return true;
+        } else return $this->db->error();
+    }
+
+    // get profile photo by Tailor id
+    public function profile_photo($id) {
+        $this->db->query("SELECT * FROM profile_photo WHERE photo_user_type = 'customer' and photo_user_id='$id'");
+        return $this->db->single_result($id);
+    }
 }
