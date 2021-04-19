@@ -36,7 +36,6 @@ class Database
     public function result_set(): ?array
     {
         return $this->stmt->fetch_all(MYSQLI_ASSOC);
-
     }
 
     // Get single record as object
