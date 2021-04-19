@@ -130,12 +130,19 @@ form {
     padding-top: 5px;
 }
 
-footer {
-    bottom: 0;
-    position:fixed;
-    height: 50px;
-    padding-top: 10px;
+#photo-upload{
+    height: 81vh;
+    margin: 0 auto;
+    padding: 30px;
     background-color: #919191;
+}
+#message {
+
+}
+
+  footer {
+    height: 50px;
+    color: #f1e9e7;
 }
 
 .t-card {
