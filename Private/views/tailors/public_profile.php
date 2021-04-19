@@ -10,9 +10,19 @@
                 <div class="row">
                     <!--Profile pics--->
                     <div class="col-sm-3">
-                        <div class="card-body">
-                            <img src="http://via.placeholder.com/180x180" alt="Card image">
-                        </div>
+                        <?php if (empty($data['photo'])): ?>
+                            <?php if ($data['tailor']['tailor_gender'] == 'Male'): ?>
+                                <img src="<?php echo URL_ROOT; ?>assets/profile_uploads/m dummy.png"
+                                     alt="Card image" width="180px" height="180px">
+                            <?php else: ?>
+                                <img src="<?php echo URL_ROOT; ?>assets/profile_uploads/f dummy.png"
+                                     alt="Card image" width="180px" height="180px">
+                            <?php endif; ?>
+
+                        <?php else: ?>
+                            <img src="<?php echo URL_ROOT; ?>assets/profile_uploads/<?php echo $data['photo']['photo_name']; ?>"
+                                 alt="Card image" width="180px" height="180px">
+                        <?php endif; ?>
                     </div>
 
                     <!--Data information--->
@@ -61,22 +71,18 @@
             <div class="col-md-9">
                 <h3>Tailor's Works</h3>
                 <div class="row">
-                    <div class="col-sm-3">
-                        <img src="http://via.placeholder.com/140x140" class="img-responsive" style="width:100%"
-                             alt="Image">
-                    </div>
-                    <div class="col-sm-3">
-                        <img src="http://via.placeholder.com/140x140" class="img-responsive" style="width:100%"
-                             alt="Image">
-                    </div>
-                    <div class="col-sm-3">
-                        <img src="http://via.placeholder.com/140x140" class="img-responsive" style="width:100%"
-                             alt="Image">
-                    </div>
-                    <div class="col-sm-3">
-                        <img src="http://via.placeholder.com/140x140" class="img-responsive" style="width:100%"
-                             alt="Image">
-                    </div>
+                    <?php if (empty($data['works'])): ?>
+                        <div class="col-sm-3">
+                            <img src="http://via.placeholder.com/180x180" alt="Card image">
+                        </div>
+                    <?php else: ?>
+                        <?php foreach ($data['works'] as $work): ?>
+                            <div class="col-sm-3">
+                                <img src="<?php echo URL_ROOT; ?>assets/work_uploads/<?php echo $work['photo_name']; ?>"
+                                     alt="Card image" width="180px" height="180px">
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
