@@ -1,31 +1,38 @@
 <?php
-class Profiles extends Controller {
+class Profiles extends Controller
+{
 
     private $tailorModel;
-    
 
-    public function __construct(){
-       if(!loggedin()){
+    public function __construct()
+    {
+        if (!loggedin()) {
             header('location: ' . URL_ROOT . 'tailors/signin');
         }
 
         $this->tailorModel = $this->model('Tailor');
     }
 
-    public function index($id){
+    // Function for accessing profile page
+    public function index($id)
+    {
         // Get tailor
         $tailor = $this->tailorModel->getTailorById($id);
+        $photo = $this->tailorModel->profile_photo($id);
+        $works = $this->tailorModel->work_photo($id);
 
         $data = [
-            'tailor' => $tailor
+            'tailor' => $tailor,
+            'photo' => $photo,
+            'works' => $works
         ];
 
         $this->view('tailors/index', $data);
     }
 
-
-    public function edit($id) {
-
+    // Function for editing profile
+    public function edit($id)
+    {
         // Check for POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST data
@@ -76,7 +83,7 @@ class Profiles extends Controller {
 
                 if ($updated) {
                     // Create Session
-                    header('location: ' . URL_ROOT . 'profiles/index/'. $id);
+                    header('location: ' . URL_ROOT . 'profiles/index/' . $id);
                 } else {
                     die('Something happened!!, Unable to update profile');
                 }
@@ -114,57 +121,145 @@ class Profiles extends Controller {
         }
     }
 
-    function upload()
-      {
-      if (isset($_POST['submit'])) {
-            // Process form
-         
-        $data = [
-                'photo_user_id' => $_SESSION['id'],
+    // Function for uploading profile photos
+    public function upload($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'photo_user_id' => $id,
                 'photo_name' => '',
-                'photo_user_type' => '',
+                'photo_user_type' => 'tailor',
+                'file_error' => ''
             ];
-             
-          $file =$_FILES['file'];
-          $fileName = $_FILES['file'] ['name'];
-          $fileTmpName = $_FILES['file'] ['tmp_name'];
-          $fileSize = $_FILES['file'] ['size'];
-          $fileError = $_FILES['file'] ['error'];
-          $fileType = $_FILES['file'] ['type'];
-         
-          $fileExt = explode('.', $fileName);
-          $fileActualExt = strtolower(end($fileExt));
 
-         $allowed = array('jpg', 'jpeg', 'png','pdf');
+            // get the file name
+            $data['photo_name'] = $_FILES['file'] ['name'];
 
-        if (in_array($fileActualExt, $allowed)) {
-            if($fileError === 0){
-                if($fileSize < 5000000){
-                    $fileNAmeNew = uniqid('', true).".".$fileActualExt;
-                    $fileDestination = '../Public/assets/uploads/'.$fileNAmeNew;
-                    move_uploaded_file($fileTmpName, $fileDestination);
-                                      
-                }else{ 
-                    echo "Your file is too large!";
-                }
-            }else {
-                echo "There was an error uploading your file!";
+            // get the file temp name
+            $fileTmpName = $_FILES['file'] ['tmp_name'];
+
+            // get the file extension
+            $fileActualExt = pathinfo($data['photo_name'], PATHINFO_EXTENSION);
+
+            // destination of the file on the server
+            $fileDestination = '../Public/assets/profile_uploads/' . $data['photo_name'];
+
+            // Check if a file was selected
+            if (empty($_FILES['file'])) {
+                $data['file_error'] = "Please select a file to upload";
             }
-          }else {
-              echo "You cannot upload files of this type!";
+
+            // Check if file extension matches required types
+            if (!in_array($fileActualExt, ['png', 'jpeg', 'jpg', 'gif'])) {
+                $data['file_error'] = "You file extension must be .png, .jpeg or .jpg";
+            } elseif ($_FILES['file']['size'] > 5000000) { // file shouldn't be larger than 5Megabyte
+                $data['file_error'] = "File too large!";
+            }
+
+            if (empty($data['file_error'])) {
+                // move the uploaded (temporary) file to the specified destination
+                if (move_uploaded_file($fileTmpName, $fileDestination)) {
+
+                    //check if any profile pic for user exist
+                    $uploaded = $this->tailorModel->upload($data);
+
+                    /*   if ($exists) {
+                              $uploaded = $this->writerModel->editPhoto($data);
+                          } else {
+                              $uploaded = $this->writerModel->uploadPhoto($data);
+                          }*/
+
+                    if ($uploaded === True) {
+                        header('location:' . URL_ROOT . 'profiles/index/' . $id);
+                    } else {
+                        $data['file_error'] = "Failed to upload file.";
+                    }
+                    $this->view('tailors/profile_upload', $data);
+                }
+                $this->view('tailors/profile_upload', $data);
+            } else {
+                $this->view('tailors/profile_upload', $data);
+            }
+        } else {
+            $data = [
+                'id' => $id,
+
+            ];
+            $this->view('tailors/profile_upload', $data);
         }
-          $tailor = $this->tailorModel->upload($data);
-            
-        }
-            
-        {
-            
-            $this->view('tailors/upload');
-           
-        }
-         
     }
-    
+
+    // Function for uploading photos of work done
+    public function works($id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $data = [
+                'photo_user_id' => $id,
+                'photo_uploaded_by' => 'tailor',
+                'photo_name' => '',
+                'file_error' => ''
+            ];
+
+            // Check if a file was selected
+            if (!empty($_FILES['file'])) {
+
+                for ($x = 0; $x < count($_FILES['file']['name']); $x++) {
+
+                    // get the file name
+                    $data['photo_name'] = $_FILES['file']['name'][$x];
+
+                    // get the file temp name
+                    $fileTmpName = $_FILES['file']['tmp_name'][$x];
+
+                    // get the file extension
+                    $fileActualExt = pathinfo($data['photo_name'], PATHINFO_EXTENSION);
+
+                    // destination of the file on the server
+                    $fileDestination = '../Public/assets/work_uploads/' . $data['photo_name'];
+
+
+                    // Check if file extension matches required types
+                    if (!in_array($fileActualExt, ['png', 'jpeg', 'jpg', 'gif'])) {
+                        $data['file_error'] = "You file extension must be .png, .jpeg or .jpg, .gif";
+                    } elseif ($_FILES['file']['size'][$x] > 5000000) { // file shouldn't be larger than 5Megabyte
+                        $data['file_error'] = "File too large!";
+                    }
+
+                    if (empty($data['file_error'])) {
+                        // move the uploaded (temporary) file to the specified destination
+                        if (move_uploaded_file($fileTmpName, $fileDestination)) {
+
+                            //check if any profile pic for user exist
+                            $upload = $this->tailorModel->work_upload($data);
+
+                            if ($upload === True) {
+                                continue;
+                            } else {
+                                $data['file_error'] = "Failed to upload file.";
+                                break;
+                            }
+                        }
+                    } else {
+                        break;
+                    }
+                }
+
+                header('location:' . URL_ROOT . 'profiles/index/' . $id);
+
+            } else {
+                $data['file_error'] = "Please select a file to upload";
+                $this->view('tailors/work_upload', $data);
+            }
+
+        } else {
+            $data = [
+                'id' => $id
+            ];
+            $this->view('tailors/work_upload', $data);
+        }
+    }
 }
 
 
