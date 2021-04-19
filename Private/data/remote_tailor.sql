@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 08, 2021 at 01:24 AM
+-- Generation Time: Apr 19, 2021 at 11:49 AM
 -- Server version: 8.0.23
 -- PHP Version: 8.0.2
 
@@ -45,7 +45,9 @@ INSERT INTO `contact_messages` (`message_id`, `message_customer_id`, `message_ta
 (11, 1, 21, 'Hello Paras, \r\n\r\nDo you think you can make a maxi skirt before wednesday?', '2021-04-05 02:11:04', 'Customer'),
 (12, 1, 21, 'Can you give me a description of what you want?', '2021-04-08 00:49:13', 'Tailor'),
 (13, 1, 21, 'Can you give me a description of what you want?', '2021-04-08 00:50:33', 'Tailor'),
-(14, 1, 21, 'Hey, still waiting for your response', '2021-04-08 00:51:24', 'Tailor');
+(14, 1, 21, 'Hey, still waiting for your response', '2021-04-08 00:51:24', 'Tailor'),
+(22, 1, 20, 'Hello Sandra, do you think you can sew a kimono jalabi by the weekend?', '2021-04-08 02:00:13', 'Customer'),
+(23, 1, 1, 'Hey! Ken, I need a Tux for an evening party in two weeks. Do you think you can pull it of?', '2021-04-18 16:29:05', 'Customer');
 
 -- --------------------------------------------------------
 
@@ -73,7 +75,7 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`customer_id`, `customer_fname`, `customer_lname`, `customer_email`, `customer_gender`, `customer_phone`, `customer_address`, `customer_city`, `customer_username`, `customer_password`, `customer_reg_date`, `customer_modify_date`) VALUES
-(1, 'William', 'Donald', 'william@gmail.com', 'Female', '+44 1632 960456', '', 'Liverpool', 'William', 'William45', '2021-03-12 02:21:15', NULL),
+(1, 'William', 'Donald', 'william@gmail.com', 'Male', '0719573485', '123 Kingdom Fast higway', 'Liverpool', 'William', 'William45', '2021-03-12 02:21:15', '2021-04-08 02:02:06'),
 (2, 'David', 'Gary', 'david@gmail.com', 'Female', '+44 1632 960689', '', 'Edinburgh', 'David', 'Davidrjr', '2021-03-12 02:21:15', NULL),
 (3, 'Charles', 'George', 'charles@gmail.com', 'Female', '+44 1632 960091', '', 'Glasgow', 'Charles', 'Charles', '2021-03-12 02:21:15', NULL),
 (4, 'Thomas', 'Kenneth', 'thomas@gmail.com', 'Female', '+44 1632 960501', '', 'GLuton', 'Thomas', 'Thomas', '2021-03-12 02:21:15', NULL),
@@ -139,6 +141,19 @@ CREATE TABLE `profile_photo` (
   `photo_upload_date` datetime DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `profile_photo`
+--
+
+INSERT INTO `profile_photo` (`photo_id`, `photo_user_type`, `photo_user_id`, `photo_name`, `photo_upload_date`) VALUES
+(4, 'Tailor', 1, 'm profile 1.jpg', '2021-04-18 22:11:04'),
+(5, 'Tailor', 2, 'm profile 2.jpg', '2021-04-18 22:12:05'),
+(6, 'Tailor', 3, 'm profile 3.jpg', '2021-04-18 22:12:48'),
+(7, 'Tailor', 4, 'm profile 4.jpg', '2021-04-18 22:13:48'),
+(8, 'Tailor', 5, 'f profile 1.jpg', '2021-04-18 22:15:13'),
+(9, 'Tailor', 6, 'f profile 2.jpg', '2021-04-18 22:15:53'),
+(10, 'Tailor', 7, 'f profile 3.jpg', '2021-04-18 22:16:28');
+
 -- --------------------------------------------------------
 
 --
@@ -147,10 +162,40 @@ CREATE TABLE `profile_photo` (
 
 CREATE TABLE `proof_of_work` (
   `photo_id` int UNSIGNED NOT NULL,
-  `photo_tailor_id` int UNSIGNED DEFAULT NULL,
-  `photo_customer_id` int UNSIGNED DEFAULT NULL,
+  `photo_user_id` int UNSIGNED DEFAULT NULL,
+  `photo_uploaded_by` set('Tailor','Customer') DEFAULT NULL,
   `photo_name` varchar(128) NOT NULL,
-  `photo_upload_date` datetime DEFAULT CURRENT_TIMESTAMP
+  `photo_upload_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `photo_work_of` int UNSIGNED DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `proof_of_work`
+--
+
+INSERT INTO `proof_of_work` (`photo_id`, `photo_user_id`, `photo_uploaded_by`, `photo_name`, `photo_upload_date`, `photo_work_of`) VALUES
+(6, 1, 'Tailor', 'm work 3.jpg', '2021-04-19 02:39:06', NULL),
+(7, 2, 'Tailor', 'work 4.jpg', '2021-04-19 02:40:05', NULL),
+(8, 3, 'Tailor', 'work 3.jpg', '2021-04-19 02:41:22', NULL),
+(9, 4, 'Tailor', 'work 2.jpg', '2021-04-19 02:42:37', NULL),
+(10, 5, 'Tailor', 'm work.jpg', '2021-04-19 02:43:31', NULL),
+(11, 6, 'Tailor', 'm work 2.jpg', '2021-04-19 02:44:40', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `service_orders`
+--
+
+CREATE TABLE `service_orders` (
+  `service_order_id` int UNSIGNED NOT NULL,
+  `tailor_id` int UNSIGNED NOT NULL,
+  `customer_id` int UNSIGNED NOT NULL,
+  `service_desc` text NOT NULL,
+  `service_cost` float NOT NULL,
+  `service_start_date` datetime NOT NULL,
+  `service_due_date` datetime NOT NULL,
+  `status` set('Processing','Ongoing','Finished') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -208,7 +253,7 @@ INSERT INTO `tailors` (`tailor_id`, `tailor_fname`, `tailor_lname`, `tailor_emai
 (25, 'Sunny', 'Savannah', 'Savannah@gmail.com', 'Male', 'Native', '2223455465', 'Canterbury', 'Canterbury', 'Male', 'Savannah36', 'Savannah36', '2021-03-12 02:21:15', NULL),
 (26, 'Juliette', 'Scarlet', 'Scarlet@gmail.com', 'Male', 'Native', '22768899774', 'Armagh', 'Armagh', 'Male', 'Scarlet39', 'Scarlet39', '2021-03-12 02:21:15', NULL),
 (29, 'Stella', 'Kings', 'stella@hotmail.com', 'Male', 'Native', '07935282936', '34, Abotswell Drive', 'Porthlethen', 'Male', 'stell', 'kennykyu6479', '2021-03-15 13:45:22', '2021-03-15 13:45:57'),
-(30, 'Kelvin', 'Phil', 'kelly@gmail.com', 'Female', 'Native', '', '134 Apartment, Caister Hall', 'Edin', 'Female', 'kelly', 'kennykyu6479', '2021-03-15 14:02:10', '2021-03-15 14:02:59'),
+(30, 'Kelvin', 'Phil', 'kelly@gmail.com', 'Male', 'English', '', '134 Apartment, kennedy Hall', 'Edin', 'Male', 'kelly', 'kennykyu6479', '2021-03-15 14:02:10', '2021-04-08 02:13:46'),
 (31, 'Stella', 'George', 'george@gmail.com', 'Male', 'English', '', '14 kingsways', 'Aberdeen', 'Male', 'george', 'kennykyu6479', '2021-03-15 14:33:37', '2021-03-15 14:34:17'),
 (32, 'Kelly', 'Jones', 'kely@gmail.com', 'Female', 'Native', '07985945625', '123, kingsway', 'Porthlethen', 'Male', 'kellz', 'kennykyu6479', '2021-03-16 12:31:21', '2021-03-16 12:32:18');
 
@@ -243,8 +288,15 @@ ALTER TABLE `profile_photo`
 --
 ALTER TABLE `proof_of_work`
   ADD PRIMARY KEY (`photo_id`),
-  ADD KEY `fk_tailor_id` (`photo_tailor_id`),
-  ADD KEY `fk_customer_id` (`photo_customer_id`);
+  ADD KEY `service_order_fk` (`photo_work_of`);
+
+--
+-- Indexes for table `service_orders`
+--
+ALTER TABLE `service_orders`
+  ADD PRIMARY KEY (`service_order_id`),
+  ADD KEY `fk_tailor_id` (`tailor_id`),
+  ADD KEY `fk_customer_id` (`customer_id`);
 
 --
 -- Indexes for table `tailors`
@@ -262,7 +314,7 @@ ALTER TABLE `tailors`
 -- AUTO_INCREMENT for table `contact_messages`
 --
 ALTER TABLE `contact_messages`
-  MODIFY `message_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `message_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -274,13 +326,19 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `profile_photo`
 --
 ALTER TABLE `profile_photo`
-  MODIFY `photo_id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `photo_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `proof_of_work`
 --
 ALTER TABLE `proof_of_work`
-  MODIFY `photo_id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `photo_id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `service_orders`
+--
+ALTER TABLE `service_orders`
+  MODIFY `service_order_id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tailors`
@@ -303,8 +361,14 @@ ALTER TABLE `contact_messages`
 -- Constraints for table `proof_of_work`
 --
 ALTER TABLE `proof_of_work`
-  ADD CONSTRAINT `fk_customer_id` FOREIGN KEY (`photo_customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_tailor_id` FOREIGN KEY (`photo_tailor_id`) REFERENCES `tailors` (`tailor_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `service_order_fk` FOREIGN KEY (`photo_work_of`) REFERENCES `service_orders` (`service_order_id`);
+
+--
+-- Constraints for table `service_orders`
+--
+ALTER TABLE `service_orders`
+  ADD CONSTRAINT `fk_customer_id` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`customer_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_tailor_id` FOREIGN KEY (`tailor_id`) REFERENCES `tailors` (`tailor_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
