@@ -20,7 +20,6 @@
                         <div>
                             <?php foreach ($data['customers'] as $customer) : ?>
                                 <div>
-
                                     <h5>
                                         <a href="<?php echo URL_ROOT; ?>tailors/message/<?php echo $customer['message_customer_id']; ?>">
                                             <?php echo $customer['customer_fname'] . " " . $customer['customer_lname'] ;?>
